@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 21:16:31 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:24:05 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	char		**mini_env;
 	char		**tokens;
 	t_cmd_group	*cmd_lines;
+	int			exit_status;
 
 	if (ac != 1 || av[0] == NULL)
 		return (EXIT_FAILURE);
@@ -41,7 +42,7 @@ int	main(int ac, char **av, char **env)
 		cmd_lines = init_cmd_group(line, mini_env);
 		if (DEBUG_MODE)
 			print_cmd_group(cmd_lines);
-		exec_cmd(cmd_lines);
+		exit_status = exec_cmd(cmd_lines);
 		clean_cmd_group(cmd_lines);
 		free(line);
 	}

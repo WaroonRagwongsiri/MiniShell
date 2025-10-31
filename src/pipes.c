@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 21:11:25 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:35:15 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 		exit(127);
 	}
 	execve(cmd_path, cur->argv, cur->env);
-	perror(cur->cmd);
 	free(cmd_path);
-	exit(EXIT_FAILURE);
+	exit_msg("Execve");
 }
