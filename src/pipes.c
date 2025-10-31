@@ -6,7 +6,11 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:19:32 by waragwon          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/10/31 14:02:02 by waragwon         ###   ########.fr       */
+=======
+/*   Updated: 2025/10/31 13:57:03 by waragwon         ###   ########.fr       */
+>>>>>>> 754b331 (pure pipe no check other thing yet)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +23,18 @@ int	exec_cmd(t_shell *shell)
 	int		i;
 	t_cmds	*cur;
 
+<<<<<<< HEAD
 	if (shell->cmd_lines == NULL || shell->process_num == 0)
 		return (0);
 	if (open_pipes(pipes, shell->process_num) == -1)
 	{
 		perror("Open Pipes");
 		ft_safe_calloc(-1, -1, NULL);
+=======
+	if (open_pipes(pipes, shell->process_num) == -1)
+	{
+		perror("Open Pipes");
+>>>>>>> 754b331 (pure pipe no check other thing yet)
 		exit(EXIT_FAILURE);
 	}
 	i = -1;
@@ -35,7 +45,10 @@ int	exec_cmd(t_shell *shell)
 		if (pid[i] == -1)
 		{
 			perror("Fork Error");
+<<<<<<< HEAD
 			ft_safe_calloc(-1, -1, NULL);
+=======
+>>>>>>> 754b331 (pure pipe no check other thing yet)
 			exit(EXIT_FAILURE);
 		}
 		if (pid[i] == 0)
@@ -43,8 +56,12 @@ int	exec_cmd(t_shell *shell)
 			dup_process(i, pipes, cur, shell->process_num);
 			close_pipes(pipes, cur, shell->process_num);
 			execve(cur->cmd, cur->argv, shell->env);
+<<<<<<< HEAD
 			ft_safe_calloc(-1, -1, NULL);
 			exit(EXIT_FAILURE);
+=======
+			exit(EXIT_SUCCESS);
+>>>>>>> 754b331 (pure pipe no check other thing yet)
 		}
 	}
 	close_pipes(pipes, cur, shell->process_num);
