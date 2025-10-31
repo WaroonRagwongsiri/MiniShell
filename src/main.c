@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 12:12:08 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 13:52:45 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,15 @@ static void	exit_after_reader(char **mini_env)
 
 int	main(int ac, char **av, char **env)
 {
-	char		*line;
-	char		**mini_env;
-	char		**tokens;
-	int			exit_status;
+	static t_shell	shell;
+	t_cmds	*cmd_lines;
 
-	if (ac != 1 || av[0] == NULL)
-		return (EXIT_FAILURE);
-	mini_env = copy_tab(env);
-	if (mini_env == NULL)
-		return (EXIT_FAILURE);
-	while (true)
-	{
-		line = reader(mini_env);
-		if (line == NULL)
-			exit_after_reader(mini_env);
-		// print_tokens(line);
-		tokens = tokenizer(line);
-		if (tokens != NULL)
-		{
-			exit_status = execute_command(tokens, mini_env);
-			printf("Exit status: %d\n", exit_status);
-			free_tab(tokens);
-		}
-		free(line);
-	}
+	cmd_lines = new_cmd((char *[]) {"/bin/ls", NULL}, env);
+	cmd_lines->next = new_cmd((char *[]) {"/bin/cat", NULL}, env);
+	cmd_lines->next->next = new_cmd((char *[]) {"/bin/cat", NULL}, env);
+	shell.env = env;
+	shell.cmd_lines = cmd_lines;
+	shell.process_num = cmd_len(cmd_lines);
+	exec_cmd(&shell);
 	return (EXIT_SUCCESS);
 }
