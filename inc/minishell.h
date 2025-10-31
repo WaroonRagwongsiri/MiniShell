@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 15:22:20 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 16:28:04 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int			execute_builtin(char **args, char **env);
 
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
+void		exit_msg(char *msg);
 
 #endif

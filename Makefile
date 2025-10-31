@@ -6,7 +6,7 @@
 #    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/10/31 13:47:49 by waragwon         ###   ########.fr        #
+#    Updated: 2025/10/31 16:31:17 by waragwon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ SRC_FILES = main.c \
 			builtin_cmds1.c \
 			builtin_cmds2.c \
 			cmds.c \
-			pipes.c
+			pipes.c \
+			pipes_utils.c \
+			end.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

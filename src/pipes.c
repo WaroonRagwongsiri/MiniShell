@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 16:18:02 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 16:55:57 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,83 +24,20 @@ int	exec_cmd(t_cmd_group *cmd_lines)
 	if (cmd_lines == NULL || process_num == 0)
 		return (0);
 	if (open_pipes(pipes, process_num) == -1)
-	{
-		perror("Open Pipes");
-		ft_safe_calloc(-1, -1, NULL);
-		exit(EXIT_FAILURE);
-	}
+		exit_msg("Pipe open Error");
 	i = -1;
 	cur = cmd_lines;
 	while (++i < process_num && cur)
 	{
 		pid[i] = fork();
 		if (pid[i] == -1)
-		{
-			perror("Fork Error");
-			ft_safe_calloc(-1, -1, NULL);
-			exit(EXIT_FAILURE);
-		}
+			exit_msg("Fork Error");
 		if (pid[i] == 0)
-		{
-			dup_process(i, pipes, cur, process_num);
-			close_pipes(pipes, process_num);
-			close_all_fd(cmd_lines);
-			execve(cur->cmd, cur->argv, cur->env);
-			perror("Execve");
-			ft_safe_calloc(-1, -1, NULL);
-			exit(EXIT_FAILURE);
-		}
+			exec(i, pipes, cmd_lines, process_num);
 		cur = cur->next;
 	}
-	close_pipes(pipes, process_num);
-	close_all_fd(cmd_lines);
+	close_all(pipes, process_num, cmd_lines);
 	return (wait_pid_process(pid, process_num));
-}
-
-void	close_fd(int fd)
-{
-	if (fd > 2)
-		close(fd);
-}
-
-int	open_pipes(int pipes[MAX_PIPE][2], int process_num)
-{
-	int	i;
-
-	i = 0;
-	while (i < process_num - 1)
-	{
-		if (pipe(pipes[i]) == -1)
-			return (-1);
-		i++;
-	}
-	return (0);
-}
-
-void	close_pipes(int pipes[MAX_PIPE][2], int process_num)
-{
-	int	i;
-
-	i = 0;
-	while (i < process_num - 1)
-	{
-		close_fd(pipes[i][0]);
-		close_fd(pipes[i][1]);
-		i++;
-	}
-}
-
-void	close_all_fd(t_cmd_group *cmd_lines)
-{
-	t_cmd_group	*cur;
-
-	cur = cmd_lines;
-	while (cur)
-	{
-		close_fd(cur->in_fd);
-		close_fd(cur->out_fd);
-		cur = cur->next;
-	}
 }
 
 void	dup_process(int index, int pipes[MAX_PIPE][2],
@@ -109,38 +46,22 @@ void	dup_process(int index, int pipes[MAX_PIPE][2],
 	if (cur->in_fd != STDIN_FILENO)
 	{
 		if (dup2(cur->in_fd, STDIN_FILENO) == -1)
-		{
-			perror("Dup2 Input File");
-			exit(EXIT_FAILURE);
-			ft_safe_calloc(-1, -1, NULL);
-		}
+			exit_msg("Dup2 Input File");
 	}
 	else if (index > 0)
 	{
 		if (dup2(pipes[index - 1][0], STDIN_FILENO) == -1)
-		{
-			perror("Dup2 Pipe Input");
-			exit(EXIT_FAILURE);
-			ft_safe_calloc(-1, -1, NULL);
-		}
+			exit_msg("Dup2 Pipe Input");
 	}
 	if (cur->out_fd != STDOUT_FILENO)
 	{
 		if (dup2(cur->out_fd, STDOUT_FILENO) == -1)
-		{
-			perror("Dup2 Output File");
-			exit(EXIT_FAILURE);
-			ft_safe_calloc(-1, -1, NULL);
-		}
+			exit_msg("Dup2 Output File");
 	}
 	else if (index < process_num - 1)
 	{
 		if (dup2(pipes[index][1], STDOUT_FILENO) == -1)
-		{
-			perror("Dup2 Pipe Output");
-			exit(EXIT_FAILURE);
-			ft_safe_calloc(-1, -1, NULL);
-		}
+			exit_msg("Dup2 Pipe Output");
 	}
 }
 
@@ -168,7 +89,23 @@ int	wait_pid_process(int pid[MAX_PROCESS], int process_num)
 			}
 		}
 	}
-	i = process_num;
-	while (--i > 0 && status[i] == 0);
+	while (--i > 0 && status[i] == 0)
+		continue ;
 	return (status[i]);
+}
+
+void	exec(int index, int pipes[MAX_PIPE][2],
+	t_cmd_group *cmd_lines, int process_num)
+{
+	t_cmd_group	*cur;
+	int			i;
+
+	i = -1;
+	cur = cmd_lines;
+	while (++i < index && cur)
+		cur = cur->next;
+	dup_process(index, pipes, cur, process_num);
+	close_all(pipes, process_num, cmd_lines);
+	execve(cur->cmd, cur->argv, cur->env);
+	exit_msg("Execve");
 }
