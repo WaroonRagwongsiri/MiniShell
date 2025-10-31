@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 11:03:26 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 20:51:10 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*ft_build_path(char *path, char *cmd)
 	return (cmd_path);
 }
 
-static char	*ft_get_cmd_path(char *cmd, char **env)
+char	*ft_get_cmd_path(char *cmd, char **env)
 {
 	int		i;
 	char	**paths;

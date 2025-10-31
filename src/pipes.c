@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 16:55:57 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:35:15 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 {
 	t_cmd_group	*cur;
 	int			i;
+	char		*cmd_path;
 
 	i = -1;
 	cur = cmd_lines;
@@ -106,6 +107,14 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 		cur = cur->next;
 	dup_process(index, pipes, cur, process_num);
 	close_all(pipes, process_num, cmd_lines);
-	execve(cur->cmd, cur->argv, cur->env);
+	cmd_path = ft_get_cmd_path(cur->cmd, cur->env);
+	if (cmd_path == NULL)
+	{
+		ft_putstr_fd(cur->cmd, STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
+		exit(127);
+	}
+	execve(cmd_path, cur->argv, cur->env);
+	free(cmd_path);
 	exit_msg("Execve");
 }

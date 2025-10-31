@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
+#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/10/31 16:31:17 by waragwon         ###   ########.fr        #
+#    Updated: 2025/10/31 21:09:14 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS = 
 INCLUDES = -I $(INC_DIR) -I $(LIBFT_DIR) 
-LIBS = -L $(LIBFT_DIR) -lft -lreadline -lhistory
+LIBS = -L $(LIBFT_DIR) -lft -lreadline #-lhistory
 
 # --- Source Files ---
 SRC_FILES = main.c \
@@ -46,7 +46,11 @@ SRC_FILES = main.c \
 			cmds.c \
 			pipes.c \
 			pipes_utils.c \
-			end.c
+			end.c \
+			parser_cmd.c \
+			parser_fd.c \
+			parser_get_info.c \
+			clean_cmd_group.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
