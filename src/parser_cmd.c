@@ -6,122 +6,70 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 20:06:32 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:04:16 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	**get_in_filenames(char **tab)
+static void	init_cmd_node(t_cmd_group *node, char *segment, char **env)
 {
-	int		i;
-	char	**res;
-
-	i = 0;
-	res = NULL;
-	while (tab[i] != NULL)
-	{
-		if (ft_strncmp(tab[i], "<", 1) == 0)
-		{
-			if (tab[i + 1] != NULL)
-				res = append_tab(res, tab[i + 1]);
-			i += 2;
-		}
-		else
-			i++;
-	}
-	return (res);
+	node->cmds_str = ft_strdup(segment);
+	node->cmd_tokens = tokenizer(segment);
+	node->in_filenames = get_in_filenames(node->cmd_tokens);
+	node->out_filenames = get_out_filenames(node->cmd_tokens);
+	node->cmd = get_cmd(node->cmd_tokens);
+	node->argv = get_argv(node->cmd_tokens);
+	node->env = env;
+	set_cmd_group_fd(node);
 }
 
-char	**get_out_filenames(char **tab)
+static void	link_cmd_node(t_cmd_group *cmds, int index, int size)
 {
-	int		i;
-	char	**res;
-
-	i = 0;
-	res = NULL;
-	while (tab[i] != NULL)
+	cmds[index].operator = NONE;
+	cmds[index].next = NULL;
+	cmds[index].prev = NULL;
+	if (index + 1 < size)
 	{
-		if (ft_strncmp(tab[i], ">", 1) == 0 || ft_strncmp(tab[i], ">>", 2) == 0)
-		{
-			if (tab[i + 1] != NULL)
-				res = append_tab(res, tab[i + 1]);
-			i += 2;
-		}
-		else
-			i++;
+		cmds[index].operator = PIPE;
+		cmds[index].next = &cmds[index + 1];
 	}
-	return (res);
+	if (index > 0)
+		cmds[index].prev = &cmds[index - 1];
 }
 
-char	*get_cmd(char **tab)
+static t_cmd_group	*build_cmd_groups(char **segments, int size, char **env)
 {
-	return (ft_strdup(tab[0]));
-}
-char	**get_argv(char **tab, char *cmd)
-{
-	int		i;
-	char	**res;
+	t_cmd_group	*cmd_group;
+	int			i;
 
+	cmd_group = malloc(sizeof(t_cmd_group) * size);
+	if (cmd_group == NULL)
+		return (NULL);
 	i = 0;
-	res = NULL;
-	while (tab[i] != NULL)
+	while (i < size)
 	{
-		if (ft_strncmp(tab[i], ">", 1) == 0 || ft_strncmp(tab[i], "<", 1) == 0)
-		{
-			if (tab[i + 1] != NULL)
-				i += 2;
-			else
-				i++;
-		}
-		else
-		{
- 			if (ft_strncmp(tab[i], cmd, ft_strlen(tab[i])) != 0)
-				res = append_tab(res, tab[i]);
-			i++;
-		}
+		init_cmd_node(&cmd_group[i], segments[i], env);
+		link_cmd_node(cmd_group, i, size);
+		i++;
 	}
-	return (res);
+	return (cmd_group);
 }
 
 t_cmd_group	*init_cmd_group(char *line, char **env)
 {
 	char		**tab;
 	t_cmd_group	*cmd_group;
-	int			i;
+	int			size;
 
 	tab = ft_split(line, '|');
-	if (tab_len(tab) < 1)
-		return (NULL);
-	cmd_group = malloc(sizeof(t_cmd_group) * (tab_len(tab) + 1));
-	i = 0;
-	while (tab[i] != NULL)
+	size = tab_len(tab);
+	if (size < 1)
 	{
-		cmd_group[i].cmds_str = ft_strdup(tab[i]);
-		cmd_group[i].cmd_tokens = tokenizer(tab[i]);
-		cmd_group[i].in_filenames = get_in_filenames(cmd_group[i].cmd_tokens);
-		cmd_group[i].out_filenames = get_out_filenames(cmd_group[i].cmd_tokens);
-		cmd_group[i].cmd = get_cmd(cmd_group[i].cmd_tokens);
-		cmd_group[i].argv = get_argv(cmd_group[i].cmd_tokens, cmd_group[i].cmd);
-		cmd_group[i].env = env;
-		if (tab[i + 1] != NULL)
-		{
-			cmd_group[i].operator = PIPE;
-			cmd_group[i].next = &cmd_group[i + 1];
-		}
-		else
-		{
-			cmd_group[i].operator = NONE;
-			cmd_group[i].next = NULL;
-		}
-		if (i == 0)
-			cmd_group[i].prev = NULL;
-		else
-			cmd_group[i].prev = &cmd_group[i - 1];
-		
-		i++;
+		free_tab(tab);
+		return (NULL);
 	}
-	cmd_group[i].next = NULL;
+	cmd_group = build_cmd_groups(tab, size, env);
 	free_tab(tab);
 	return (cmd_group);
 }

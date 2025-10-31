@@ -59,24 +59,41 @@ void	*free_tab(char **tab)
 	return (NULL);
 }
 
+static char	**free_partial(char **tab, int count)
+{
+	while (count > 0)
+	{
+		--count;
+		free(tab[count]);
+	}
+	free(tab);
+	return (NULL);
+}
+
 char	**append_tab(char **tab, char *str)
 {
 	char	**new_tab;
 	int		i;
+	int		size;
 
-	if (tab == NULL)
-		tab = malloc(sizeof(char *));
-	new_tab = malloc(sizeof(char *) * (tab_len(tab) + 2));
+	if (str == NULL)
+		return (tab);
+	size = tab_len(tab);
+	new_tab = malloc(sizeof(char *) * (size + 2));
 	if (new_tab == NULL)
 		return (NULL);
-	i = 0;
-	while (tab[i] != NULL)
+	i = -1;
+	while (++i < size)
 	{
 		new_tab[i] = ft_strdup(tab[i]);
-		i++;
+		if (new_tab[i] == NULL)
+			return (free_partial(new_tab, i));
 	}
 	new_tab[i] = ft_strdup(str);
+	if (new_tab[i] == NULL)
+		return (free_partial(new_tab, i));
 	new_tab[i + 1] = NULL;
-	free_tab(tab);
+	if (tab != NULL)
+		free_tab(tab);
 	return (new_tab);
 }

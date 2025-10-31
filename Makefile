@@ -6,7 +6,7 @@
 #    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/10/31 20:19:22 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/10/31 21:09:14 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,9 @@ SRC_FILES = main.c \
 			pipes_utils.c \
 			end.c \
 			parser_cmd.c \
-			parser_fd.c
+			parser_fd.c \
+			parser_get_info.c \
+			clean_cmd_group.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

@@ -6,11 +6,12 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 20:17:15 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:16:31 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#define DEBUG_MODE 0
 
 static void	exit_after_reader(char **mini_env)
 {
@@ -25,7 +26,7 @@ int	main(int ac, char **av, char **env)
 	char		*line;
 	char		**mini_env;
 	char		**tokens;
-	t_cmd_group	*cmd_group;
+	t_cmd_group	*cmd_lines;
 
 	if (ac != 1 || av[0] == NULL)
 		return (EXIT_FAILURE);
@@ -37,15 +38,11 @@ int	main(int ac, char **av, char **env)
 		line = reader(mini_env);
 		if (line == NULL)
 			exit_after_reader(mini_env);
-		cmd_group = init_cmd_group(line, env);
-		print_cmd_group(cmd_group);
-		// tokens = tokenizer(line);
-		// if (tokens != NULL)
-		// {
-		// 	exit_status = execute_command(tokens, mini_env);
-		// 	printf("Exit status: %d\n", exit_status);
-		// 	free_tab(tokens);
-		// }
+		cmd_lines = init_cmd_group(line, mini_env);
+		if (DEBUG_MODE)
+			print_cmd_group(cmd_lines);
+		exec_cmd(cmd_lines);
+		clean_cmd_group(cmd_lines);
 		free(line);
 	}
 	return (EXIT_SUCCESS);

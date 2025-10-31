@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 20:17:03 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:10:45 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		print_cmd_group(t_cmd_group	*g);
 // exec_cmd.c
 int			ft_execve(char *cmd_path, char **cmd, char **env);
 int			execute_command(char **cmd, char **env);
+char		*ft_get_cmd_path(char *cmd, char **env);
 
 // exec_redirect.c
 int			handle_output_redirect(char *filename, int append);
@@ -80,5 +81,17 @@ void		exit_msg(char *msg);
 
 // parser_cmd.c
 t_cmd_group	*init_cmd_group(char *line, char **env);
+
+// parser_fd.c
+void		set_cmd_group_fd(t_cmd_group *node);
+
+// parser_get_info.c
+char		**get_in_filenames(char **tab);
+char		**get_out_filenames(char **tab);
+char		*get_cmd(char **tab);
+char		**get_argv(char **tab);
+
+// clean_cmd_group.c
+void		clean_cmd_group(t_cmd_group *g);
 
 #endif
