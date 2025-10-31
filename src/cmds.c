@@ -6,42 +6,39 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:09:15 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 13:28:43 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 15:23:04 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmds	*new_cmd(char **argvs, char **env)
+t_cmd_group	*simple_new_cmd(char **argv, char **env)
 {
-	t_cmds	*cmd;
+	t_cmd_group	*new;
 
-	cmd = ft_safe_calloc(1, sizeof(t_cmds), "");
-	if (!cmd)
+	new = ft_safe_calloc(1, sizeof(t_cmd_group), "");
+	if (!new)
 		return (NULL);
-	if (argvs && argvs[0])
-		cmd->cmd = argvs[0];
-	else
-		cmd->cmd = NULL;
-	cmd->argv = argvs;
-	cmd->env = env;
-	cmd->io.fd_in = 0;
-	cmd->io.fd_out = 1;
-	cmd->io.is_rein = false;
-	cmd->io.is_reout = false;
-	cmd->io.is_heredoc = false;
-	cmd->io.is_append = false;
-	cmd->next = NULL;
-	return (cmd);
+	new->argv = argv;
+	new->cmd = argv[0];
+	new->env = env;
+	new->in_filenames = NULL;
+	new->out_filenames = NULL;
+	new->operator = NULL;
+	new->in_fd = STDIN_FILENO;
+	new->out_fd = STDOUT_FILENO;
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
 }
 
-int	cmd_len(t_cmds *cmds_lines)
+int	cmd_len(t_cmd_group *cmd_lines)
 {
-	t_cmds	*cur;
-	int		len;
+	t_cmd_group	*cur;
+	int			len;
 
 	len = 0;
-	cur = cmds_lines;
+	cur = cmd_lines;
 	while (cur)
 	{
 		cur = cur->next;
