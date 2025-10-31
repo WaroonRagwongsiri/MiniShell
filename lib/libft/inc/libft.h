@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 09:00:40 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/29 10:23:49 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 11:58:49 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_atoi_base(char *str, char *base);
+void	*ft_safe_calloc(size_t nmemb, size_t size, char *cmd);
 
 // Bonus part
 typedef struct s_list
