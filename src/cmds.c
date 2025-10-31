@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:09:15 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 15:23:04 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 20:15:47 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_cmd_group	*simple_new_cmd(char **argv, char **env)
 	new->env = env;
 	new->in_filenames = NULL;
 	new->out_filenames = NULL;
-	new->operator = NULL;
+	new->operator = NONE;
 	new->in_fd = STDIN_FILENO;
 	new->out_fd = STDOUT_FILENO;
 	new->next = NULL;

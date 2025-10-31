@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 17:23:51 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 20:17:03 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 char		**copy_tab(char **tab);
 void		*free_tab(char **tab);
 int			tab_len(char **tab);
+char		**append_tab(char **tab, char *str);
 
 // reader.c
 char		*get_prompt(char **env);
@@ -47,6 +48,7 @@ char		**tokenizer(char *s);
 
 // debug.c 
 void		print_tokens(char *line);
+void		print_cmd_group(t_cmd_group	*g);
 
 // exec_cmd.c
 int			ft_execve(char *cmd_path, char **cmd, char **env);
@@ -75,5 +77,8 @@ int			execute_builtin(char **args, char **env);
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
 void		exit_msg(char *msg);
+
+// parser_cmd.c
+t_cmd_group	*init_cmd_group(char *line, char **env);
 
 #endif

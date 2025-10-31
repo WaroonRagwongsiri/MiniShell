@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 14:14:48 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 20:17:15 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **env)
 	char		*line;
 	char		**mini_env;
 	char		**tokens;
-	int			exit_status;
+	t_cmd_group	*cmd_group;
 
 	if (ac != 1 || av[0] == NULL)
 		return (EXIT_FAILURE);
@@ -37,13 +37,15 @@ int	main(int ac, char **av, char **env)
 		line = reader(mini_env);
 		if (line == NULL)
 			exit_after_reader(mini_env);
-		tokens = tokenizer(line);
-		if (tokens != NULL)
-		{
-			exit_status = execute_command(tokens, mini_env);
-			printf("Exit status: %d\n", exit_status);
-			free_tab(tokens);
-		}
+		cmd_group = init_cmd_group(line, env);
+		print_cmd_group(cmd_group);
+		// tokens = tokenizer(line);
+		// if (tokens != NULL)
+		// {
+		// 	exit_status = execute_command(tokens, mini_env);
+		// 	printf("Exit status: %d\n", exit_status);
+		// 	free_tab(tokens);
+		// }
 		free(line);
 	}
 	return (EXIT_SUCCESS);

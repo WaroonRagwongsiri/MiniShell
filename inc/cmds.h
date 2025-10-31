@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 16:58:20 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 20:15:33 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # define MAX_PROCESS 50
 # define MAX_PIPE 49
+
+typedef enum s_operator
+{
+	NONE,
+	PIPE,
+}	t_operator;
 
 typedef struct s_cmd_group
 {
@@ -25,7 +31,7 @@ typedef struct s_cmd_group
 	char				*cmd;
 	char				**argv;
 	char				**env;
-	char				*operator;
+	t_operator			operator;
 	int					in_fd;
 	int					out_fd;
 	struct s_cmd_group	*next;
