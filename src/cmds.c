@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:09:15 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 20:15:47 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:18:55 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ t_cmd_group	*simple_new_cmd(char **argv, char **env)
 	new->out_fd = STDOUT_FILENO;
 	new->next = NULL;
 	new->prev = NULL;
+	new->is_heredoc = false;
+	new->h_pipe[0] = 0;
+	new->h_pipe[1] = 1;
+	new->lim = "EOF";
 	return (new);
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
+#    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/10/31 21:09:14 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/10/31 23:05:27 by waroonwork@      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ SRC_FILES = main.c \
 			parser_cmd.c \
 			parser_fd.c \
 			parser_get_info.c \
-			clean_cmd_group.c
+			clean_cmd_group.c \
+			heredoc.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 21:35:15 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 00:03:05 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ int	exec_cmd(t_cmd_group *cmd_lines)
 	if (cmd_lines == NULL || process_num == 0)
 		return (0);
 	if (open_pipes(pipes, process_num) == -1)
-		exit_msg("Pipe open Error");
+		exit_msg(PIPE_ERR);
 	i = -1;
 	cur = cmd_lines;
+	loop_heredoc(cmd_lines);
 	while (++i < process_num && cur)
 	{
 		pid[i] = fork();
@@ -83,15 +84,12 @@ int	wait_pid_process(int pid[MAX_PROCESS], int process_num)
 				continue ;
 			if (waitpid(pid[i], &status[i], WNOHANG) > 0)
 			{
-				WEXITSTATUS(status[i]);
 				closed[i] = 1;
 				closed_process++;
 			}
 		}
 	}
-	while (--i > 0 && status[i] == 0)
-		continue ;
-	return (status[i]);
+	return (WEXITSTATUS(status[process_num - 1]));
 }
 
 void	exec(int index, int pipes[MAX_PIPE][2],
@@ -109,11 +107,7 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 	close_all(pipes, process_num, cmd_lines);
 	cmd_path = ft_get_cmd_path(cur->cmd, cur->env);
 	if (cmd_path == NULL)
-	{
-		ft_putstr_fd(cur->cmd, STDERR_FILENO);
-		ft_putendl_fd(": command not found", STDERR_FILENO);
-		exit(127);
-	}
+		exit_cmd(cur->cmd);
 	execve(cmd_path, cur->argv, cur->env);
 	free(cmd_path);
 	exit_msg("Execve");
