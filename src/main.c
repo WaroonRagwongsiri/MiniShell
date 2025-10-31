@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 11:51:34 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/10/31 12:12:08 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av, char **env)
 		line = reader(mini_env);
 		if (line == NULL)
 			exit_after_reader(mini_env);
+		// print_tokens(line);
 		tokens = tokenizer(line);
 		if (tokens != NULL)
 		{
