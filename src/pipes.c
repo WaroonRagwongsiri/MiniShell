@@ -5,16 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/31 13:19:32 by waragwon          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2025/10/31 14:02:02 by waragwon         ###   ########.fr       */
-=======
-/*   Updated: 2025/10/31 13:57:03 by waragwon         ###   ########.fr       */
->>>>>>> 754b331 (pure pipe no check other thing yet)
-=======
-/*   Updated: 2025/10/31 14:38:22 by waragwon         ###   ########.fr       */
->>>>>>> ce3c7e6 (Okay Seem working properly)
+/*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
+/*   Updated: 2025/10/31 14:44:50 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +19,16 @@ int	exec_cmd(t_shell *shell)
 	int		i;
 	t_cmds	*cur;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ce3c7e6 (Okay Seem working properly)
 	if (shell->cmd_lines == NULL || shell->process_num == 0)
 		return (0);
 	if (open_pipes(pipes, shell->process_num) == -1)
 	{
 		perror("Open Pipes");
 		ft_safe_calloc(-1, -1, NULL);
-<<<<<<< HEAD
-=======
+	}
 	if (open_pipes(pipes, shell->process_num) == -1)
 	{
 		perror("Open Pipes");
->>>>>>> 754b331 (pure pipe no check other thing yet)
-=======
->>>>>>> ce3c7e6 (Okay Seem working properly)
 		exit(EXIT_FAILURE);
 	}
 	i = -1;
@@ -55,14 +39,8 @@ int	exec_cmd(t_shell *shell)
 		if (pid[i] == -1)
 		{
 			perror("Fork Error");
-<<<<<<< HEAD
-<<<<<<< HEAD
 			ft_safe_calloc(-1, -1, NULL);
-=======
->>>>>>> 754b331 (pure pipe no check other thing yet)
-=======
 			ft_safe_calloc(-1, -1, NULL);
->>>>>>> ce3c7e6 (Okay Seem working properly)
 			exit(EXIT_FAILURE);
 		}
 		if (pid[i] == 0)
@@ -70,17 +48,11 @@ int	exec_cmd(t_shell *shell)
 			dup_process(i, pipes, cur, shell->process_num);
 			close_pipes(pipes, cur, shell->process_num);
 			execve(cur->cmd, cur->argv, shell->env);
-<<<<<<< HEAD
-<<<<<<< HEAD
 			ft_safe_calloc(-1, -1, NULL);
 			exit(EXIT_FAILURE);
-=======
 			exit(EXIT_SUCCESS);
->>>>>>> 754b331 (pure pipe no check other thing yet)
-=======
 			ft_safe_calloc(-1, -1, NULL);
 			exit(EXIT_FAILURE);
->>>>>>> ce3c7e6 (Okay Seem working properly)
 		}
 	}
 	close_pipes(pipes, cur, shell->process_num);
