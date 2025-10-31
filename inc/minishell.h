@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 12:35:51 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:02:14 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,20 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "../lib/libft/inc/libft.h"
-# include "cmds.h"
+// # include "cmds.h"
+
+typedef struct s_cmd_group
+{
+	char			*cmds_str;
+	char			**cmd_tokens;
+	char			**in_filenames;
+	char			**out_filenames;
+	char			*cmd;
+	char			**argv;
+	char			**env;
+	char			*operator;
+	struct s_cmd_group *next;
+}	t_cmd_group;
 
 // utils_tab.c
 char		**copy_tab(char **tab);
