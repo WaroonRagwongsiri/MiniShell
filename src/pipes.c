@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:19:32 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 13:57:03 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:02:02 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ int	exec_cmd(t_shell *shell)
 	int		i;
 	t_cmds	*cur;
 
+	if (shell->cmd_lines == NULL || shell->process_num == 0)
+		return (0);
 	if (open_pipes(pipes, shell->process_num) == -1)
 	{
 		perror("Open Pipes");
+		ft_safe_calloc(-1, -1, NULL);
 		exit(EXIT_FAILURE);
 	}
 	i = -1;
@@ -32,6 +35,7 @@ int	exec_cmd(t_shell *shell)
 		if (pid[i] == -1)
 		{
 			perror("Fork Error");
+			ft_safe_calloc(-1, -1, NULL);
 			exit(EXIT_FAILURE);
 		}
 		if (pid[i] == 0)
@@ -39,7 +43,8 @@ int	exec_cmd(t_shell *shell)
 			dup_process(i, pipes, cur, shell->process_num);
 			close_pipes(pipes, cur, shell->process_num);
 			execve(cur->cmd, cur->argv, shell->env);
-			exit(EXIT_SUCCESS);
+			ft_safe_calloc(-1, -1, NULL);
+			exit(EXIT_FAILURE);
 		}
 	}
 	close_pipes(pipes, cur, shell->process_num);
