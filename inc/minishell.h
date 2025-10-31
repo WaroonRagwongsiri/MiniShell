@@ -87,5 +87,6 @@ int			execute_builtin(char **args, char **env);
 
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
+void		exit_msg(char *msg);
 
 #endif

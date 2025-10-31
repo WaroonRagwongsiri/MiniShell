@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage.c                                          :+:      :+:    :+:   */
+/*   end.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/30 10:09:54 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 15:26:33 by waragwon         ###   ########.fr       */
+/*   Created: 2025/10/31 16:26:20 by waragwon          #+#    #+#             */
+/*   Updated: 2025/10/31 16:30:04 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_safe_calloc(size_t nmemb, size_t size, char *cmd)
+void	exit_msg(char *msg)
 {
-	static t_list	*mem_lst = NULL;
-	t_list			*new;
-	void			*ptr;
-
-	if (cmd == NULL)
-	{
-		ft_lstclear(&mem_lst, free);
-		return (NULL);
-	}
-	new = ft_lstnew(NULL);
-	if (!new)
-		return (NULL);
-	ft_lstadd_back(&mem_lst, new);
-	ptr = ft_calloc(nmemb, size);
-	if (!ptr)
-		return (NULL);
-	new->content = ptr;
-	return (ptr);
+	ft_putendl_fd(msg, 2);
+	ft_safe_calloc(-1, -1, NULL);
+	exit(EXIT_FAILURE);
 }
