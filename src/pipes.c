@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 15:43:19 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 16:18:02 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	exec_cmd(t_cmd_group *cmd_lines)
 			close_pipes(pipes, process_num);
 			close_all_fd(cmd_lines);
 			execve(cur->cmd, cur->argv, cur->env);
+			perror("Execve");
 			ft_safe_calloc(-1, -1, NULL);
 			exit(EXIT_FAILURE);
 		}
@@ -102,23 +103,44 @@ void	close_all_fd(t_cmd_group *cmd_lines)
 	}
 }
 
-void	dup_process(int index_process, int pipes[MAX_PIPE][2],\
+void	dup_process(int index, int pipes[MAX_PIPE][2],
 	t_cmd_group *cur, int process_num)
 {
-	if (index_process == 0)
+	if (cur->in_fd != STDIN_FILENO)
 	{
-		dup2(cur->in_fd, STDIN_FILENO);
-		dup2(pipes[index_process][1], STDOUT_FILENO);
+		if (dup2(cur->in_fd, STDIN_FILENO) == -1)
+		{
+			perror("Dup2 Input File");
+			exit(EXIT_FAILURE);
+			ft_safe_calloc(-1, -1, NULL);
+		}
 	}
-	else if (index_process == process_num - 1)
+	else if (index > 0)
 	{
-		dup2(pipes[index_process - 1][0], STDIN_FILENO);
-		dup2(cur->out_fd, STDOUT_FILENO);
+		if (dup2(pipes[index - 1][0], STDIN_FILENO) == -1)
+		{
+			perror("Dup2 Pipe Input");
+			exit(EXIT_FAILURE);
+			ft_safe_calloc(-1, -1, NULL);
+		}
 	}
-	else
+	if (cur->out_fd != STDOUT_FILENO)
 	{
-		dup2(pipes[index_process - 1][0], STDIN_FILENO);
-		dup2(pipes[index_process][1], STDOUT_FILENO);
+		if (dup2(cur->out_fd, STDOUT_FILENO) == -1)
+		{
+			perror("Dup2 Output File");
+			exit(EXIT_FAILURE);
+			ft_safe_calloc(-1, -1, NULL);
+		}
+	}
+	else if (index < process_num - 1)
+	{
+		if (dup2(pipes[index][1], STDOUT_FILENO) == -1)
+		{
+			perror("Dup2 Pipe Output");
+			exit(EXIT_FAILURE);
+			ft_safe_calloc(-1, -1, NULL);
+		}
 	}
 }
 
