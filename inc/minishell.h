@@ -77,7 +77,6 @@ int			execute_builtin(char **args, char **env);
 
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
-void		exit_msg(char *msg);
 
 // parser_cmd.c
 t_cmd_group	*init_cmd_group(char *line, char **env);
@@ -93,5 +92,9 @@ char		**get_argv(char **tab);
 
 // clean_cmd_group.c
 void		clean_cmd_group(t_cmd_group *g);
+
+// Utils Exit
+void		exit_msg(char *msg);
+void		exit_cmd(char *cmd);
 
 #endif

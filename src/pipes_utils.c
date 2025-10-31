@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:25:24 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 16:33:14 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:40:28 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ void	close_all_fd(t_cmd_group *cmd_lines)
 	{
 		close_fd(cur->in_fd);
 		close_fd(cur->out_fd);
+		if (cur->is_heredoc)
+		{
+			close_fd(cur->h_pipe[0]);
+			close_fd(cur->h_pipe[1]);
+		}
 		cur = cur->next;
 	}
 }
