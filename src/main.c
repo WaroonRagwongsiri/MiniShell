@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 19:42:49 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:21:32 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	exit_after_reader(char **mini_env)
 {
 	clear_history();
-	free_tab(mini_env);
+	ft_safe_calloc(-1, -1, NULL);
 	printf("\nexit\n");
 	exit(EXIT_SUCCESS);
 }
@@ -43,8 +43,6 @@ int	main(int ac, char **av, char **env)
 		if (DEBUG_MODE)
 			print_cmd_group(cmd_lines);
 		exit_status = execute_command(cmd_lines, mini_env);
-		clean_cmd_group(cmd_lines);
-		free(line);
 	}
 	return (EXIT_SUCCESS);
 }

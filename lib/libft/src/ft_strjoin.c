@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:11:40 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/08/25 13:16:44 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:11:57 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	arr = malloc(s1_len + s2_len + 1);
+	arr = ft_safe_calloc(s1_len + s2_len + 1, sizeof(char), "");
 	if (arr == NULL)
 		return (NULL);
 	i = 0;

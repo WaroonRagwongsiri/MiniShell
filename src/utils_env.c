@@ -40,7 +40,6 @@ static char	*ft_build_path(char *path, char *cmd)
 
 	temp_path = ft_strjoin(path, "/");
 	cmd_path = ft_strjoin(temp_path, cmd);
-	free(temp_path);
 	return (cmd_path);
 }
 
@@ -65,7 +64,6 @@ char	*ft_get_cmd_path(char *cmd, char **env)
 			free_tab(paths);
 			return (cmd_path);
 		}
-		free(cmd_path);
 		i++;
 	}
 	free_tab(paths);

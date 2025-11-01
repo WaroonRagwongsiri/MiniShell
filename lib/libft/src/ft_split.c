@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:33:52 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/08/27 12:13:39 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:08:28 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*ft_spliter(const char *str, char c_sep, int start_idx)
 		i++;
 		size++;
 	}
-	word = malloc(sizeof(char) * (size + 1));
+	word = ft_safe_calloc(size + 1, sizeof(char), "");
 	if (word == NULL)
 		return (NULL);
 	i = 0;
@@ -69,7 +69,7 @@ static	char	**ft_empty_arr(void)
 {
 	char	**arr;
 
-	arr = malloc(sizeof(char *));
+	arr = ft_safe_calloc(1, sizeof(char *), "");
 	arr[0] = NULL;
 	return (arr);
 }
@@ -86,7 +86,7 @@ char	**ft_split(char const *s, char c)
 	if (ft_strlen(s) == 0)
 		return (ft_empty_arr());
 	size = ft_count_words(s, c);
-	arr = malloc(sizeof(char *) * (size + 1));
+	arr = ft_safe_calloc(size + 1, sizeof(char *), "");
 	if (arr == NULL)
 		return (NULL);
 	i = 0;

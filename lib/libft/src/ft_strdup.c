@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:42:22 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/08/25 15:06:17 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:18:44 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s)
 	int		i;
 
 	size = ft_strlen(s);
-	arr = malloc(size + 1);
+	arr = ft_safe_calloc(size + 1, sizeof(char), "");
 	if (arr == NULL)
 		return (NULL);
 	i = 0;

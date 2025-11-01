@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 19:42:05 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:27:10 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,6 @@ void		set_out_files(t_cmd_group *node);
 
 // parser_infiles.c
 void		set_in_files(t_cmd_group *node);
-
-// clean_cmd_group.c
-void		clean_cmd_group(t_cmd_group *node);
 
 // Utils Exit
 void		exit_msg(char *msg);
