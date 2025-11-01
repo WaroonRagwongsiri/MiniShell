@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 21:10:45 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 12:23:20 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,26 @@ char		*ft_getenv(char **env, char *key);
 // parser_cmd.c
 t_cmd_group	*init_cmd_group(char *line, char **env);
 
-// parser_fd.c
-void		set_cmd_group_fd(t_cmd_group *node);
-
 // parser_get_info.c
+int			next_after_redirect(char **tab, int index);
 char		**get_in_filenames(char **tab);
 char		**get_out_filenames(char **tab);
 char		*get_cmd(char **tab);
 char		**get_argv(char **tab);
 
+// parser_check.c
+bool		is_heredoc_token(char *token);
+bool		is_append_token(char *token);
+bool		is_simple_redirect(char *token, char c);
+
+// parser_outfiles.c
+void		set_out_files(t_cmd_group *node);
+
+// parser_infiles.c
+void		set_in_files(t_cmd_group *node);
+
 // clean_cmd_group.c
-void		clean_cmd_group(t_cmd_group *g);
+void		clean_cmd_group(t_cmd_group *node);
 
 // Utils Exit
 void		exit_msg(char *msg);
