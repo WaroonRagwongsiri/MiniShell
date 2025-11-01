@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 21:03:05 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/01 21:07:29 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,18 @@ static void	exit_after_reader(char **mini_env)
 int	main(int ac, char **av, char **env)
 {
 	char		*line;
-	char		**mini_env;
 	char		**tokens;
 	t_cmd_group	*cmd_lines;
 	int			exit_status;
 
 	if (ac != 1 || av[0] == NULL)
 		return (EXIT_FAILURE);
-	mini_env = copy_tab(env);
-	if (mini_env == NULL)
-		return (EXIT_FAILURE);
 	while (true)
 	{
-		line = reader(mini_env);
+		line = reader(env);
 		if (line == NULL)
-			exit_after_reader(mini_env);
-		cmd_lines = init_cmd_group(line, mini_env);
+			exit_after_reader(env);
+		cmd_lines = init_cmd_group(line, env);
 		if (DEBUG_MODE)
 			print_cmd_group(cmd_lines);
 		exit_status = exec_cmd(cmd_lines);

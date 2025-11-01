@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 09:58:30 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 19:26:53 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 21:13:11 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,8 @@ char	*ft_get_cmd_path(char *cmd, char **env)
 	{
 		cmd_path = ft_build_path(paths[i], cmd);
 		if (access(cmd_path, F_OK) == 0)
-		{
-			free_tab(paths);
 			return (cmd_path);
-		}
 		i++;
 	}
-	free_tab(paths);
 	return (NULL);
 }
