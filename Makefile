@@ -6,7 +6,7 @@
 #    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/01 19:42:30 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/11/01 20:27:22 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ SRC_FILES = main.c \
 			debug.c \
 			exec_cmd.c \
 			exec_builtin.c \
-			exec_redirect.c \
 			builtin_cmds1.c \
 			builtin_cmds2.c \
 			cmds.c \
@@ -52,7 +51,6 @@ SRC_FILES = main.c \
 			parser_check.c \
 			parser_in_files.c \
 			parser_out_files.c \
-			clean_cmd_group.c \
 			heredoc.c \
 			iofiles.c
 

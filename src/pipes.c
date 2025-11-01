@@ -109,6 +109,5 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 	if (cmd_path == NULL)
 		exit_cmd(cur->cmd);
 	execve(cmd_path, cur->argv, cur->env);
-	free(cmd_path);
 	exit_msg("Execve");
 }

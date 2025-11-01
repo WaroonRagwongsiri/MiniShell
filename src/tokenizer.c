@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 13:09:01 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/30 17:55:12 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:19:35 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	**tokenizer(char *str)
 	char	**tab;
 
 	size = count_words(str);
-	tab = malloc(sizeof(char *) * (size + 1));
+	tab = ft_safe_calloc(size + 1, sizeof(char *), "");
 	if (tab == NULL)
 		return (NULL);
 	tab[size] = NULL;
@@ -111,7 +111,7 @@ char	**tokenizer(char *str)
 		while (str[j] != '\0' && is_whitespace(str[j]))
 			j++;
 		len = token_len(&str[j]);
-		tab[i] = malloc(len + 1);
+		tab[i] = ft_safe_calloc(len + 1, sizeof(char), "");
 		if (tab[i] == NULL)
 			return (free_tab(tab));
 		fill_str(tab[i], &str[j], len);
