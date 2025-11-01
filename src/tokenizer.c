@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 13:09:01 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 20:19:35 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:57:53 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	**tokenizer(char *str)
 		len = token_len(&str[j]);
 		tab[i] = ft_safe_calloc(len + 1, sizeof(char), "");
 		if (tab[i] == NULL)
-			return (free_tab(tab));
+			return (NULL);
 		fill_str(tab[i], &str[j], len);
 		j += len;
 	}

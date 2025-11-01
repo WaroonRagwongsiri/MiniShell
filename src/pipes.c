@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/01 19:40:22 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 21:07:49 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,11 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 		cur = cur->next;
 	dup_process(index, pipes, cur, process_num);
 	close_all(pipes, process_num, cmd_lines);
+	// if (is_builtin(cur->cmd))
+	// {
+	// 	execute_builtin(cur);
+	// 	exit(EXIT_FAILURE);
+	// }
 	cmd_path = ft_get_cmd_path(cur->cmd, cur->env);
 	if (cmd_path == NULL)
 		exit_cmd(cur->cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 13:32:13 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:56:53 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,7 @@ t_cmd_group	*init_cmd_group(char *line, char **env)
 	tab = ft_split(line, '|');
 	size = tab_len(tab);
 	if (size < 1)
-	{
-		free_tab(tab);
 		return (NULL);
-	}
 	cmd_group = build_cmd_groups(tab, size, env);
-	free_tab(tab);
 	return (cmd_group);
 }
