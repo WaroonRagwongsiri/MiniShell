@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 21:07:29 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/01 21:43:02 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static void	exit_after_reader(char **mini_env)
 {
+	(void)mini_env;
 	clear_history();
 	ft_safe_calloc(-1, -1, NULL);
 	printf("\nexit\n");
@@ -24,7 +25,6 @@ static void	exit_after_reader(char **mini_env)
 int	main(int ac, char **av, char **env)
 {
 	char		*line;
-	char		**tokens;
 	t_cmd_group	*cmd_lines;
 	int			exit_status;
 
@@ -38,9 +38,10 @@ int	main(int ac, char **av, char **env)
 		cmd_lines = init_cmd_group(line, env);
 		if (DEBUG_MODE)
 			print_cmd_group(cmd_lines);
+		free(line);
 		exit_status = exec_cmd(cmd_lines);
 		printf("\nExit Status :%d\n", exit_status);
-		free(line);
+		ft_safe_calloc(-1, -1, NULL);
 	}
 	ft_safe_calloc(-1, -1, NULL);
 	return (EXIT_SUCCESS);

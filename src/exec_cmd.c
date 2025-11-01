@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 19:43:45 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 21:43:30 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	execute_command(t_cmd_group *cmd_lines, char **env)
 {
 	int			process_num;
 
+	(void)env;
 	process_num = cmd_len(cmd_lines);
 	if (cmd_lines == NULL || process_num == 0)
 		return (0);
