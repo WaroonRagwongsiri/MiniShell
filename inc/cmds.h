@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 20:15:33 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 10:37:19 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ void		loop_heredoc(t_cmd_group *cmd_lines);
 void		loop_open(t_cmd_group *cmd_lines);
 void		loop_in(t_cmd_group *cur);
 void		loop_out(t_cmd_group *cur);
+t_infiles	*new_infile(char *filename, bool is_h, char *lim);
+t_outfiles	*new_outfile(char *filename, bool is_append);
 
 #endif
