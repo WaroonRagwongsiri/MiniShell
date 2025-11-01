@@ -3,5 +3,5 @@
 *.a
 *.out
 minishell
-test
+*test*
 .DS_Store
