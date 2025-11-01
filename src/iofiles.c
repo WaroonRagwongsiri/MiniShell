@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iofiles.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/01 10:38:42 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/01 22:44:00 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ void	loop_out(t_cmd_group *cur)
 	{
 		close_fd(cur->out_fd);
 		if (cur_out->is_append)
-			cur->out_fd = open(cur_out->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			cur->out_fd = open(cur_out->filename,
+					O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
-			cur->out_fd = open(cur_out->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			cur->out_fd = open(cur_out->filename,
+					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		cur_out = cur_out->next;
 	}
 }
