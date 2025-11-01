@@ -25,6 +25,21 @@ typedef enum s_operator
 	PIPE,
 }	t_operator;
 
+typedef struct s_infiles
+{
+	char				*filename;
+	bool				is_heredoc;
+	char				*lim;
+	struct s_infiles	*next;
+}	t_infiles;
+
+typedef struct s_outfiles
+{
+	char				*filename;
+	bool				is_append;
+	struct s_outfiles	*next;
+}	t_outfiles;
+
 typedef struct s_cmd_group
 {
 	char				*cmds_str;
@@ -40,6 +55,8 @@ typedef struct s_cmd_group
 	bool				is_heredoc;
 	int					h_pipe[2];
 	char				*lim;
+	struct s_infiles	*in_files;
+	struct s_outfiles	*out_files;
 	struct s_cmd_group	*next;
 	struct s_cmd_group	*prev;
 }	t_cmd_group;
@@ -61,5 +78,8 @@ void		exec(int index, int pipes[MAX_PIPE][2],
 int			heredoc(t_cmd_group *cur);
 void		read_til_lim(t_cmd_group *cur);
 void		loop_heredoc(t_cmd_group *cmd_lines);
+void		loop_open(t_cmd_group *cmd_lines);
+void		loop_in(t_cmd_group *cur);
+void		loop_out(t_cmd_group *cur);
 
 #endif

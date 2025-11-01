@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:09:15 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 23:18:55 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/01 09:41:09 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_cmd_group	*simple_new_cmd(char **argv, char **env)
 	new->h_pipe[0] = 0;
 	new->h_pipe[1] = 1;
 	new->lim = "EOF";
+	new->in_files = NULL;
+	new->out_files = NULL;
 	return (new);
 }
 
