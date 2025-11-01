@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 12:22:06 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 13:32:13 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,16 @@ static t_cmd_group	*build_cmd_groups(char **segments, int size, char **env)
 	t_cmd_group	*cmd_group;
 	int			i;
 
-	cmd_group = malloc(sizeof(t_cmd_group) * size);
+	cmd_group = ft_safe_calloc(size, sizeof(t_cmd_group), "");
 	if (cmd_group == NULL)
 		return (NULL);
 	i = 0;
 	while (i < size)
 	{
+		cmd_group[i].in_fd = STDIN_FILENO;
+		cmd_group[i].out_fd = STDOUT_FILENO;
+		cmd_group[i].h_pipe[0] = -1;
+		cmd_group[i].h_pipe[1] = -1;
 		init_cmd_node(&cmd_group[i], segments[i], env);
 		link_cmd_node(cmd_group, i, size);
 		i++;
