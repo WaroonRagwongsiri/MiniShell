@@ -6,12 +6,12 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 21:43:02 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/01 22:07:48 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 static void	exit_after_reader(char **mini_env)
 {
@@ -39,8 +39,8 @@ int	main(int ac, char **av, char **env)
 		if (DEBUG_MODE)
 			print_cmd_group(cmd_lines);
 		free(line);
-		exit_status = exec_cmd(cmd_lines);
-		printf("\nExit Status :%d\n", exit_status);
+		exit_status = execute_command(cmd_lines, env);
+		(void) exit_status;
 		ft_safe_calloc(-1, -1, NULL);
 	}
 	ft_safe_calloc(-1, -1, NULL);
