@@ -6,96 +6,27 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 20:51:10 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:43:45 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static char	*ft_build_path(char *path, char *cmd)
+int	execute_command(t_cmd_group *cmd_lines, char **env)
 {
-	char	*temp_path;
-	char	*cmd_path;
+	int			process_num;
 
-	temp_path = ft_strjoin(path, "/");
-	cmd_path = ft_strjoin(temp_path, cmd);
-	free(temp_path);
-	return (cmd_path);
-}
-
-char	*ft_get_cmd_path(char *cmd, char **env)
-{
-	int		i;
-	char	**paths;
-	char	*cmd_path;
-	char	*env_var;
-
-	i = 0;
-	env_var = ft_getenv(env, "PATH");
-	if (env_var == NULL)
-		return (NULL);
-	paths = ft_split(env_var, ':');
-	i = 0;
-	while (paths[i] != NULL)
-	{
-		cmd_path = ft_build_path(paths[i], cmd);
-		if (access(cmd_path, F_OK) == 0)
-		{
-			free_tab(paths);
-			return (cmd_path);
-		}
-		free(cmd_path);
-		i++;
-	}
-	free_tab(paths);
-	return (NULL);
-}
-
-int	ft_execve(char *cmd_path, char **cmd, char **env)
-{
-	int	status;
-	int	i;
-
-	if (process_redirect(cmd))
-	{
-		i = 0;
-		while (!is_redirect_char(cmd[i][0]))
-			i++;
-		while (cmd[i] != NULL)
-		{
-			cmd[i] = NULL;
-			i++;
-		}
-	}
-	status = execve(cmd_path, cmd, env);
-	return (status);
-}
-
-int	execute_command(char **cmd, char **env)
-{
-	pid_t	pid;
-	char	*cmd_path;
-
-	if (cmd[0] == NULL)
+	process_num = cmd_len(cmd_lines);
+	if (cmd_lines == NULL || process_num == 0)
 		return (0);
-	if (is_builtin(cmd[0]))
-		return (execute_builtin(cmd, env));
-	pid = fork();
-	if (pid == -1)
+	if (process_num == 1
+		&& cmd_lines->argv != NULL
+		&& cmd_lines->argv[0] != NULL
+		&& is_builtin(cmd_lines->argv[0]))
 	{
-		perror("fork");
-		return (1);
-	}
-	else if (pid == 0)
-	{
-		cmd_path = ft_get_cmd_path(cmd[0], env);
-		if (cmd_path == NULL || ft_execve(cmd_path, cmd, env) == -1)
-		{
-			perror(cmd[0]);
-			return (127);
-		}
+		loop_open(cmd_lines);
+		return (execute_builtin(cmd_lines));
 	}
 	else
-		waitpid(pid, NULL, 0);
-	return (0);
+		return (exec_cmd(cmd_lines));
 }
