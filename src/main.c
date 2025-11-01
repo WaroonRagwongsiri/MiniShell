@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 23:13:42 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/01 23:22:50 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	main(int ac, char **av, char **env)
 		free(line);
 		exit_status = execute_command(cmd_lines, mini_env);
 		(void) exit_status;
-		ft_safe_calloc(-1, -1, NULL);
 	}
 	ft_safe_calloc(-1, -1, NULL);
 	return (EXIT_SUCCESS);
