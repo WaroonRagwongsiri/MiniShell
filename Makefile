@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
+#    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/01 20:27:22 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/11/01 21:42:37 by waroonwork@      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ LIBFT = $(LIBFT_DIR)/libft.a
 # --- Compiler and Flags ---
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-CFLAGS = 
 INCLUDES = -I $(INC_DIR) -I $(LIBFT_DIR) 
 LIBS = -L $(LIBFT_DIR) -lft -lreadline #-lhistory
 
