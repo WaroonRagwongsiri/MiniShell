@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   untils_env.c                                       :+:      :+:    :+:   */
+/*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 09:58:30 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 09:58:49 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:26:53 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,44 @@ char	*ft_getenv(char **env, char *key)
 		}
 		i++;
 	}
+	return (NULL);
+}
+
+static char	*ft_build_path(char *path, char *cmd)
+{
+	char	*temp_path;
+	char	*cmd_path;
+
+	temp_path = ft_strjoin(path, "/");
+	cmd_path = ft_strjoin(temp_path, cmd);
+	free(temp_path);
+	return (cmd_path);
+}
+
+char	*ft_get_cmd_path(char *cmd, char **env)
+{
+	int		i;
+	char	**paths;
+	char	*cmd_path;
+	char	*env_var;
+
+	i = 0;
+	env_var = ft_getenv(env, "PATH");
+	if (env_var == NULL)
+		return (NULL);
+	paths = ft_split(env_var, ':');
+	i = 0;
+	while (paths[i] != NULL)
+	{
+		cmd_path = ft_build_path(paths[i], cmd);
+		if (access(cmd_path, F_OK) == 0)
+		{
+			free_tab(paths);
+			return (cmd_path);
+		}
+		free(cmd_path);
+		i++;
+	}
+	free_tab(paths);
 	return (NULL);
 }

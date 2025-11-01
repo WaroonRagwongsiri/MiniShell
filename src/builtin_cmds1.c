@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/30 20:23:48 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:24:58 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,90 +16,94 @@
 /*
 TODO : handle echo with " "
 */
-int	builtin_echo(char **args)
+int	builtin_echo(t_cmd_group *cmd)
 {
-	int	i;
-	int	newline;
+	int		i;
+	bool	newline;
 
 	i = 1;
-	newline = 1;
-	if (args[1] != NULL && ft_strncmp(args[1], "-n", 2) == 0)
+	newline = true;
+	if (cmd->argv[1] != NULL && ft_strncmp(cmd->argv[1], "-n", 2) == 0)
 	{
-		newline = 0;
+		newline = false;
 		i = 2;
 	}
-	while (args[i] != NULL)
+	while (cmd->argv[i] != NULL)
 	{
-		printf("%s", args[i]);
-		if (args[i + 1] != NULL)
-			printf(" ");
+		ft_putstr_fd(cmd->argv[i], cmd->out_fd);
+		if (cmd->argv[i + 1] != NULL)
+			ft_putstr_fd(" ", cmd->out_fd);
 		i++;
 	}
 	if (newline)
-		printf("\n");
+		ft_putstr_fd("\n", cmd->out_fd);
+	close_builtin_fds(cmd);
 	return (0);
 }
 
-int	builtin_pwd(void)
+int	builtin_pwd(t_cmd_group *cmd)
 {
 	char	cwd[PATH_MAX];
-	char	*path;
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		printf("%s\n", cwd);
+		ft_putendl_fd(cwd, cmd->out_fd);
+		close_builtin_fds(cmd);
 		return (0);
 	}
-	else
-	{
-		perror("pwd");
-		return (1);
-	}
+	perror("pwd");
+	close_builtin_fds(cmd);
+	return (1);
 }
 
-int	builtin_cd(char **args, char **env)
+int	builtin_cd(t_cmd_group *cmd)
 {
 	char	*path;
 
-	if (args[1] == NULL)
+	if (cmd->argv[1] == NULL)
 	{
-		path = ft_getenv(env, "HOME");
+		path = ft_getenv(cmd->env, "HOME");
 		if (path == NULL)
 		{
 			ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+			close_builtin_fds(cmd);
 			return (1);
 		}
 	}
 	else
-		path = args[1];
+		path = cmd->argv[1];
 	if (chdir(path) != 0)
 	{
 		perror("cd");
+		close_builtin_fds(cmd);
 		return (1);
 	}
+	close_builtin_fds(cmd);
 	return (0);
 }
 
-int	builtin_exit(char **args)
+int	builtin_exit(t_cmd_group *cmd)
 {
 	int	exit_code;
 
 	exit_code = 0;
-	printf("exit\n");
-	if (args[1] != NULL)
-		exit_code = ft_atoi(args[1]);
+	ft_putendl_fd("exit", cmd->out_fd);
+	if (cmd->argv[1] != NULL)
+		exit_code = ft_atoi(cmd->argv[1]);
+	close_builtin_fds(cmd);
 	exit(exit_code);
 }
 
-int	builtin_env(char **env)
+int	builtin_env(t_cmd_group *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (env[i] != NULL)
+	while (cmd->env[i] != NULL)
 	{
-		printf("%s\n", env[i]);
+		ft_putendl_fd(cmd->env[i], cmd->out_fd);
 		i++;
 	}
+	close_builtin_fds(cmd);
 	return (0);
 }

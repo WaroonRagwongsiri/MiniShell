@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 12:23:20 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:42:05 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,33 @@ char		**tokenizer(char *s);
 void		print_tokens(char *line);
 void		print_cmd_group(t_cmd_group	*g);
 
-// exec_cmd.c
-int			ft_execve(char *cmd_path, char **cmd, char **env);
-int			execute_command(char **cmd, char **env);
-char		*ft_get_cmd_path(char *cmd, char **env);
-
 // exec_redirect.c
 int			handle_output_redirect(char *filename, int append);
 int			handle_input_redirect(char *filename);
 int			process_redirect(char **cmd);
 
 // builtin_cmd1.c
-int			builtin_echo(char **args);
-int			builtin_pwd(void);
-int			builtin_cd(char **args, char **env);
-int			builtin_exit(char **args);
-int			builtin_env(char **env);
+int			builtin_echo(t_cmd_group *cmd);
+int			builtin_pwd(t_cmd_group *cmd);
+int			builtin_cd(t_cmd_group *cmd);
+int			builtin_exit(t_cmd_group *cmd);
+int			builtin_env(t_cmd_group *cmd);
 
 // builtin_cmd2.c
-int			builtin_export(char **args, char ***env);
-int			builtin_unset(char **args, char ***env);
+void		close_builtin_fds(t_cmd_group *cmd);
+int			builtin_export(t_cmd_group *cmd, char ***env);
+int			builtin_unset(t_cmd_group *cmd, char ***env);
 
 // exec_buildin.c
 int			is_builtin(char *cmd);
-int			execute_builtin(char **args, char **env);
+int			execute_builtin(t_cmd_group *cmd);
+
+// exec_cmd.c
+int			execute_command(t_cmd_group *cmd_lines, char **env);
 
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
+char		*ft_get_cmd_path(char *cmd, char **env);
 
 // parser_cmd.c
 t_cmd_group	*init_cmd_group(char *line, char **env);
