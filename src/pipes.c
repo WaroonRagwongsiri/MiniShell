@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/01 00:03:05 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/01 10:34:28 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	exec_cmd(t_cmd_group *cmd_lines)
 	process_num = cmd_len(cmd_lines);
 	if (cmd_lines == NULL || process_num == 0)
 		return (0);
+	loop_open(cmd_lines);
 	if (open_pipes(pipes, process_num) == -1)
 		exit_msg(PIPE_ERR);
 	i = -1;
 	cur = cmd_lines;
-	loop_heredoc(cmd_lines);
 	while (++i < process_num && cur)
 	{
 		pid[i] = fork();

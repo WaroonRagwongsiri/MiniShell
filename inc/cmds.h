@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/10/31 20:15:33 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 10:37:19 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ typedef enum s_operator
 	PIPE,
 }	t_operator;
 
+typedef struct s_infiles
+{
+	char				*filename;
+	bool				is_heredoc;
+	char				*lim;
+	struct s_infiles	*next;
+}	t_infiles;
+
+typedef struct s_outfiles
+{
+	char				*filename;
+	bool				is_append;
+	struct s_outfiles	*next;
+}	t_outfiles;
+
 typedef struct s_cmd_group
 {
 	char				*cmds_str;
@@ -40,6 +55,8 @@ typedef struct s_cmd_group
 	bool				is_heredoc;
 	int					h_pipe[2];
 	char				*lim;
+	struct s_infiles	*in_files;
+	struct s_outfiles	*out_files;
 	struct s_cmd_group	*next;
 	struct s_cmd_group	*prev;
 }	t_cmd_group;
@@ -61,5 +78,10 @@ void		exec(int index, int pipes[MAX_PIPE][2],
 int			heredoc(t_cmd_group *cur);
 void		read_til_lim(t_cmd_group *cur);
 void		loop_heredoc(t_cmd_group *cmd_lines);
+void		loop_open(t_cmd_group *cmd_lines);
+void		loop_in(t_cmd_group *cur);
+void		loop_out(t_cmd_group *cur);
+t_infiles	*new_infile(char *filename, bool is_h, char *lim);
+t_outfiles	*new_outfile(char *filename, bool is_append);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 00:02:16 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/01 10:44:54 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,17 @@ int	main(int ac, char **av, char **env)
 // 	int			out_cmd3;
 
 // 	cmd_lines = NULL;
-// 	cmd_lines = simple_new_cmd((char *[]) {"sleep", "20", NULL}, env);
-// 	second = simple_new_cmd((char *[]) {"sleep", "10", NULL}, env);
+// 	cmd_lines = simple_new_cmd((char *[]) {"cat", "-e", NULL}, env);
+// 	second = simple_new_cmd((char *[]) {"cat", "-e", NULL}, env);
 // 	cmd_lines->next = second;
 // 	second->prev = cmd_lines;
-// 	third = simple_new_cmd((char *[]) {"sleep", "5", NULL}, env);
+// 	third = simple_new_cmd((char *[]) {"cat", "-e", NULL}, env);
 // 	second->next = third;
 // 	third->prev = second;
-// 	cmd_lines->is_heredoc = true;
-// 	second->is_heredoc = true;
-// 	third->is_heredoc = true;
+// 	cmd_lines->in_files = new_infile("in1", false, NULL);
+// 	second->in_files = new_infile(NULL, true, "EOF");
+// 	third->in_files = new_infile(NULL, true, "EOF");
+// 	third->out_files = new_outfile("out3", true);
 // 	printf("Exit Status : %d\n", exec_cmd(cmd_lines));
 // 	ft_safe_calloc(-1, -1, NULL);
 // 	return (EXIT_SUCCESS);

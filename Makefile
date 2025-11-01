@@ -6,7 +6,7 @@
 #    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/10/31 23:05:27 by waroonwork@      ###   ########.fr        #
+#    Updated: 2025/11/01 09:55:22 by waroonwork@      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SRC_FILES = main.c \
 			parser_fd.c \
 			parser_get_info.c \
 			clean_cmd_group.c \
-			heredoc.c
+			heredoc.c \
+			iofiles.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
