@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:06:18 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 21:06:50 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 11:15:31 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ static void	clean_cmd_node(t_cmd_group *node)
 	node->env = NULL;
 }
 
-void	clean_cmd_group(t_cmd_group *g)
+void	clean_cmd_group(t_cmd_group *node)
 {
 	t_cmd_group	*cur;
 	t_cmd_group	*next;
 	t_cmd_group	*base;
 
-	if (g == NULL)
+	if (node == NULL)
 		return ;
-	base = g;
-	cur = g;
+	base = node;
+	cur = node;
 	while (cur != NULL)
 	{
 		next = cur->next;

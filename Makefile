@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
+#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/01 09:55:22 by waroonwork@      ###   ########.fr        #
+#    Updated: 2025/11/01 12:23:32 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,10 @@ SRC_FILES = main.c \
 			pipes_utils.c \
 			end.c \
 			parser_cmd.c \
-			parser_fd.c \
 			parser_get_info.c \
+			parser_check.c \
+			parser_in_files.c \
+			parser_out_files.c \
 			clean_cmd_group.c \
 			heredoc.c \
 			iofiles.c
