@@ -6,33 +6,59 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:06:18 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 11:15:31 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/01 12:40:54 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	clean_infiles_list(t_infiles *in_files)
+{
+	t_infiles	*current;
+	t_infiles	*next;
+
+	current = in_files;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}
+
+static void	clean_outfiles_list(t_outfiles *out_files)
+{
+	t_outfiles	*current;
+	t_outfiles	*next;
+
+	current = out_files;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}
 
 static void	clean_cmd_node(t_cmd_group *node)
 {
 	if (node == NULL)
 		return ;
 	free(node->cmds_str);
-	node->cmds_str = NULL;
 	free_tab(node->cmd_tokens);
-	node->cmd_tokens = NULL;
 	free_tab(node->in_filenames);
-	node->in_filenames = NULL;
 	free_tab(node->out_filenames);
-	node->out_filenames = NULL;
 	free(node->cmd);
-	node->cmd = NULL;
 	free_tab(node->argv);
-	node->argv = NULL;
 	close_fd(node->in_fd);
 	close_fd(node->out_fd);
-	node->in_fd = STDIN_FILENO;
-	node->out_fd = STDOUT_FILENO;
-	node->env = NULL;
+	if (node->is_heredoc)
+	{
+		close_fd(node->h_pipe[0]);
+		close_fd(node->h_pipe[1]);
+	}
+	clean_infiles_list(node->in_files);
+	clean_outfiles_list(node->out_files);
 }
 
 void	clean_cmd_group(t_cmd_group *node)
