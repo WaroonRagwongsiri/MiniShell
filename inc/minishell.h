@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 20:27:10 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/02 09:01:07 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ char		**tokenizer(char *s);
 void		print_tokens(char *line);
 void		print_cmd_group(t_cmd_group	*g);
 
-// exec_redirect.c
-int			handle_output_redirect(char *filename, int append);
-int			handle_input_redirect(char *filename);
-int			process_redirect(char **cmd);
+// expander.c
+void		expand_tokens(char **tokens, char **env, int *exit_status);
 
 // builtin_cmd1.c
 int			builtin_echo(t_cmd_group *cmd);
@@ -67,6 +65,13 @@ void		close_builtin_fds(t_cmd_group *cmd);
 int			builtin_export(t_cmd_group *cmd, char ***env);
 int			builtin_unset(t_cmd_group *cmd, char ***env);
 
+// builtin_utils.c
+bool		is_valid_identifier(char *arg);
+int			find_env_index(char **env, char *arg);
+void		print_env(char **env, int fd);
+int			append_env(char ***env, char *arg);
+int			set_env_var(char ***env, char *arg);
+
 // exec_buildin.c
 int			is_builtin(char *cmd);
 int			execute_builtin(t_cmd_group *cmd);
@@ -79,7 +84,7 @@ char		*ft_getenv(char **env, char *key);
 char		*ft_get_cmd_path(char *cmd, char **env);
 
 // parser_cmd.c
-t_cmd_group	*init_cmd_group(char *line, char **env);
+t_cmd_group	*init_cmd_group(char *line, char **env, int *exit_status);
 
 // parser_get_info.c
 int			next_after_redirect(char **tab, int index);

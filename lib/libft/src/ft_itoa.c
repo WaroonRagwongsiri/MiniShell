@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:57:17 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/08/27 10:18:01 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/02 09:09:27 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*ft_create_arr(int n)
 	char	*arr;
 
 	size = ft_get_size(n);
-	arr = malloc(size + 1);
+	arr = ft_safe_calloc(size + 1, sizeof(char), "");
 	if (arr == NULL)
 		return (NULL);
 	arr[size] = '\0';

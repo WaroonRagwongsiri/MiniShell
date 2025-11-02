@@ -3,50 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 23:22:50 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/02 09:04:00 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #define DEBUG_MODE 0
 
-static void	exit_after_reader(char **mini_env)
+static void	exit_after_reader(void)
 {
-	(void)mini_env;
 	clear_history();
 	ft_safe_calloc(-1, -1, NULL);
 	printf("\nexit\n");
 	exit(EXIT_SUCCESS);
 }
 
-int	main(int ac, char **av, char **env)
+static char	**init_environment(char **env)
+{
+	char	**mini_env;
+
+	mini_env = copy_tab(env);
+	if (mini_env == NULL)
+		exit(EXIT_FAILURE);
+	return (mini_env);
+}
+
+static void	run_shell(char **mini_env)
 {
 	char		*line;
-	char		**mini_env;
 	t_cmd_group	*cmd_lines;
 	int			exit_status;
 
-	if (ac != 1 || av[0] == NULL)
-		return (EXIT_FAILURE);
-	mini_env = copy_tab(env);
-	if (!mini_env)
-		exit(EXIT_FAILURE);
+	exit_status = 0;
 	while (true)
 	{
 		line = reader(mini_env);
 		if (line == NULL)
-			exit_after_reader(mini_env);
-		cmd_lines = init_cmd_group(line, mini_env);
+			exit_after_reader();
+		cmd_lines = init_cmd_group(line, mini_env, &exit_status);
 		if (DEBUG_MODE)
 			print_cmd_group(cmd_lines);
 		free(line);
 		exit_status = execute_command(cmd_lines, mini_env);
-		(void) exit_status;
+		if (cmd_lines != NULL)
+			mini_env = cmd_lines->env;
 	}
-	ft_safe_calloc(-1, -1, NULL);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	char	**mini_env;
+
+	if (ac != 1 || av[0] == NULL)
+		return (EXIT_FAILURE);
+	mini_env = init_environment(env);
+	run_shell(mini_env);
 	return (EXIT_SUCCESS);
 }
 
