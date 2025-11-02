@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 16:02:04 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:30:41 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,16 @@ int	wait_pid_process(int pid[MAX_PROCESS], int process_num)
 			}
 		}
 	}
-	if (WTERMSIG(status[process_num - 1]) == SIGINT)
-		ft_putendl_fd("", 2);
-	else if (WTERMSIG(status[process_num - 1]) == SIGQUIT)
-		ft_putendl_fd("Quit (core dumped)", 2);
+	print_sig_exit(status[process_num - 1]);
 	return (WEXITSTATUS(status[process_num - 1]));
+}
+
+void	print_sig_exit(int status)
+{
+	if (WTERMSIG(status) == SIGINT)
+		ft_putendl_fd("", 2);
+	else if (WTERMSIG(status) == SIGQUIT)
+		ft_putendl_fd("Quit (core dumped)", 2);
 }
 
 void	exec(int index, int pipes[MAX_PIPE][2],
