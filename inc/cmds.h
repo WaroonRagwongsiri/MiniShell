@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 13:55:27 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:55:05 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void		close_all_fd(t_cmd_group *cmd_lines);
 void		dup_process(int index, int pipes[MAX_PIPE][2],
 				t_cmd_group *cur, int process_num);
 int			wait_pid_process(int pid[MAX_PROCESS], int process_num);
+void		print_sig_exit(int status);
 void		close_all(int pipes[MAX_PIPE][2], int process_num,
 				t_cmd_group *cmd_lines);
 void		exec(int index, int pipes[MAX_PIPE][2],
@@ -80,6 +81,7 @@ void		exec(int index, int pipes[MAX_PIPE][2],
 // Heredocs
 int			heredoc(t_cmd_group *cur);
 void		read_til_lim(t_cmd_group *cur);
+void		heredoc_eof(t_cmd_group *cur);
 void		loop_heredoc(t_cmd_group *cmd_lines);
 
 // Iofiles
@@ -91,5 +93,6 @@ t_outfiles	*new_outfile(char *filename, bool is_append);
 int			check_in_access(char *filename, t_cmd_group *cur);
 int			check_out_access(char *filename, t_cmd_group *cur);
 void		fd_error_once(char *filename, t_cmd_group *cur, char *msg);
+void		close_old(t_cmd_group *cur);
 
 #endif

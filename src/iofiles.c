@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 14:01:56 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:08:38 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	loop_in(t_cmd_group *cur)
 	t_infiles	*cur_in;
 
 	cur_in = cur->in_files;
-	while (cur_in)
+	while (cur_in && g_status != SIGINT)
 	{
-		close_fd(cur->in_fd);
+		close_old(cur);
 		if (check_in_access(cur_in->filename, cur) == -1)
 		{
 			cur->is_error = true;
@@ -44,7 +44,10 @@ void	loop_in(t_cmd_group *cur)
 			cur->is_heredoc = true;
 			cur->lim = cur_in->lim;
 			if (heredoc(cur) == -1)
+			{
 				cur->is_error = true;
+				return ;
+			}
 		}
 		else
 			cur->in_fd = open(cur_in->filename, O_RDONLY);
