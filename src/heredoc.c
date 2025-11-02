@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 22:37:01 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/10/31 23:44:52 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/02 15:54:17 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	read_til_lim(t_cmd_group *cur)
 	char	*line;
 
 	line = readline("> ");
-	while (line && ft_strncmp(line, cur->lim, ft_strlen(cur->lim) + 1) != 0)
+	while (line && ft_strncmp(line, cur->lim, ft_strlen(cur->lim) + 1) != 0
+			&& g_status != SIGINT)
 	{
 		write(cur->h_pipe[1], line, ft_strlen(line));
 		write(cur->h_pipe[1], "\n", 1);

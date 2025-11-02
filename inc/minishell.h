@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/02 14:28:52 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:34:10 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@
 # include <fcntl.h>
 # include "../lib/libft/inc/libft.h"
 # include "cmds.h"
+
+extern volatile sig_atomic_t	g_status;
+
+typedef enum s_sig_mode
+{
+	MAIN,
+	CHILD,
+	HEREDOC
+}	t_sig_mode;
 
 // utils_tab.c
 char		**copy_tab(char **tab);
@@ -110,6 +119,10 @@ void		exit_cmd(char *cmd);
 void		exit_errno(int exit_status);
 
 // Signal
-void		handler(int signum);
+void		signal_handler(t_sig_mode mode);
+void		main_interrupt(int signum);
+void		child_interrupt(int signum);
+void		child_quit(int signum);
+void		heredoc_interrupt(int signum);
 
 #endif
