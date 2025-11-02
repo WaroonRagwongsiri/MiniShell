@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 20:56:53 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/02 09:03:31 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	init_cmd_node(t_cmd_group *node, char *segment, char **env)
+static void	init_cmd_node(t_cmd_group *node, char *segment,
+	char **env, int *exit_status)
 {
 	node->cmds_str = ft_strdup(segment);
 	node->cmd_tokens = tokenizer(segment);
+	expand_tokens(node->cmd_tokens, env, exit_status);
 	node->in_filenames = get_in_filenames(node->cmd_tokens);
 	node->out_filenames = get_out_filenames(node->cmd_tokens);
 	node->cmd = get_cmd(node->cmd_tokens);
@@ -43,7 +45,8 @@ static void	link_cmd_node(t_cmd_group *cmds, int index, int size)
 		cmds[index].prev = &cmds[index - 1];
 }
 
-static t_cmd_group	*build_cmd_groups(char **segments, int size, char **env)
+static t_cmd_group	*build_cmd_groups(char **segments, int size,
+	char **env, int *exit_status)
 {
 	t_cmd_group	*cmd_group;
 	int			i;
@@ -58,14 +61,14 @@ static t_cmd_group	*build_cmd_groups(char **segments, int size, char **env)
 		cmd_group[i].out_fd = STDOUT_FILENO;
 		cmd_group[i].h_pipe[0] = -1;
 		cmd_group[i].h_pipe[1] = -1;
-		init_cmd_node(&cmd_group[i], segments[i], env);
+		init_cmd_node(&cmd_group[i], segments[i], env, exit_status);
 		link_cmd_node(cmd_group, i, size);
 		i++;
 	}
 	return (cmd_group);
 }
 
-t_cmd_group	*init_cmd_group(char *line, char **env)
+t_cmd_group	*init_cmd_group(char *line, char **env, int *exit_status)
 {
 	char		**tab;
 	t_cmd_group	*cmd_group;
@@ -75,6 +78,6 @@ t_cmd_group	*init_cmd_group(char *line, char **env)
 	size = tab_len(tab);
 	if (size < 1)
 		return (NULL);
-	cmd_group = build_cmd_groups(tab, size, env);
+	cmd_group = build_cmd_groups(tab, size, env, exit_status);
 	return (cmd_group);
 }

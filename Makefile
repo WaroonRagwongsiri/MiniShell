@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
+#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/01 21:42:37 by waroonwork@      ###   ########.fr        #
+#    Updated: 2025/11/02 08:37:22 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_FILES = main.c \
 			exec_builtin.c \
 			builtin_cmds1.c \
 			builtin_cmds2.c \
+			builtin_utils.c \
 			cmds.c \
 			pipes.c \
 			pipes_utils.c \
@@ -51,7 +52,8 @@ SRC_FILES = main.c \
 			parser_in_files.c \
 			parser_out_files.c \
 			heredoc.c \
-			iofiles.c
+			iofiles.c \
+			expander.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
