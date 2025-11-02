@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 14:17:50 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 14:59:00 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:05:23 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,5 @@ void	handler(int signum)
 		rl_crlf();
 		rl_set_prompt(get_prompt(NULL));
 		rl_redisplay();
-	}
-	else if (signum == SIGQUIT)
-		continue ;
-	else if (signum == SIGTSTP)
-	{
-		exit_msg("Stop");
 	}
 }
