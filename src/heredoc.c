@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 22:37:01 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 18:03:36 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 22:08:53 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,30 @@ void	read_til_lim(t_cmd_group *cur)
 
 int	heredoc(t_cmd_group *cur)
 {
-	signal_handler(HEREDOC);
+	int	pid;
+	int	exit_status;
+
 	if (pipe(cur->h_pipe) == -1)
-	{
-		signal_handler(MAIN);
 		return (-1);
-	}
-	read_til_lim(cur);
-	if (g_status == SIGINT)
-	{
-		signal_handler(MAIN);
+	pid = fork();
+	if (pid == -1)
 		return (-1);
+	if (pid == 0)
+	{
+		signal_handler(HEREDOC);
+		read_til_lim(cur);
+		exit_errno(0);
 	}
-	close_fd(cur->h_pipe[1]);
-	cur->in_fd = cur->h_pipe[0];
-	signal_handler(MAIN);
-	return (0);
-}
+	else
+	{
+		close_fd(cur->h_pipe[1]);
+		cur->in_fd = cur->h_pipe[0];
+		waitpid(pid, &exit_status, 0);
+		if (exit_status != 0)
+			return (-1);
+		}
+		return (0);
+	}
 
 void	loop_heredoc(t_cmd_group *cmd_lines)
 {

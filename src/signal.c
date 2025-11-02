@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 14:17:50 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 17:41:40 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 22:08:42 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,8 @@ void	child_quit(int signum)
 void	heredoc_interrupt(int signum)
 {
 	(void)signum;
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	rl_crlf();
-	rl_set_prompt(get_prompt(NULL));
-	rl_redisplay();
 	g_status = SIGINT;
+	exit_errno(130);
 }
 
 void	signal_handler(t_sig_mode mode)
