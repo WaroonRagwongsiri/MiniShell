@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iofiles.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/01 22:44:00 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/02 13:51:09 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,18 @@ void	loop_in(t_cmd_group *cur)
 	while (cur_in)
 	{
 		close_fd(cur->in_fd);
+		if (check_in_access(cur_in->filename, cur) == -1)
+		{
+			cur->is_error = true;
+			cur_in = cur_in->next;
+			continue ;
+		}
 		if (cur_in->is_heredoc)
 		{
 			cur->is_heredoc = true;
 			cur->lim = cur_in->lim;
-			heredoc(cur);
+			if (heredoc(cur) == -1)
+				cur->is_error = true;
 		}
 		else
 			cur->in_fd = open(cur_in->filename, O_RDONLY);
@@ -53,6 +60,11 @@ void	loop_out(t_cmd_group *cur)
 	while (cur_out)
 	{
 		close_fd(cur->out_fd);
+		if (check_out_access(cur_out->filename, cur) == -1)
+		{
+			cur->is_error = true;
+			return ;
+		}
 		if (cur_out->is_append)
 			cur->out_fd = open(cur_out->filename,
 					O_WRONLY | O_CREAT | O_APPEND, 0644);
