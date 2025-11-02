@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 13:55:17 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 14:43:25 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int	check_in_access(char *filename, t_cmd_group *cur)
 {
 	if (!filename)
-	{
-		fd_error_once(filename, cur, ": No such file or directory");
-		return (-1);
-	}
+		return (0);
 	if (access(filename, F_OK) == -1)
 	{
 		fd_error_once(filename, cur, ": No such file or directory");
