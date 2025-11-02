@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 22:37:01 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 17:27:31 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:03:36 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,21 @@ void	read_til_lim(t_cmd_group *cur)
 
 int	heredoc(t_cmd_group *cur)
 {
+	signal_handler(HEREDOC);
 	if (pipe(cur->h_pipe) == -1)
+	{
+		signal_handler(MAIN);
 		return (-1);
+	}
 	read_til_lim(cur);
+	if (g_status == SIGINT)
+	{
+		signal_handler(MAIN);
+		return (-1);
+	}
 	close_fd(cur->h_pipe[1]);
 	cur->in_fd = cur->h_pipe[0];
+	signal_handler(MAIN);
 	return (0);
 }
 

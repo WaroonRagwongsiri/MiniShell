@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/02 15:45:24 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:43:12 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1 || av[0] == NULL)
 		return (EXIT_FAILURE);
 	signal_handler(MAIN);
+	rl_initialize();
 	mini_env = init_environment(env);
 	run_shell(mini_env);
 	return (EXIT_SUCCESS);

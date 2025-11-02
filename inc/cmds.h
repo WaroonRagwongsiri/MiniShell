@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 17:30:58 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:55:05 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ t_outfiles	*new_outfile(char *filename, bool is_append);
 int			check_in_access(char *filename, t_cmd_group *cur);
 int			check_out_access(char *filename, t_cmd_group *cur);
 void		fd_error_once(char *filename, t_cmd_group *cur, char *msg);
+void		close_old(t_cmd_group *cur);
 
 #endif
