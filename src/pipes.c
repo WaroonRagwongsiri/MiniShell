@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/01 22:05:20 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/02 12:54:41 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 	t_cmd_group	*cur;
 	int			i;
 	char		*cmd_path;
+	int			exit_status;
 
 	i = -1;
 	cur = cmd_lines;
@@ -108,7 +109,11 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 	if (cur->argv
 		&& cur->argv[0]
 		&& is_builtin(cur->argv[0]))
-		exit(execute_builtin(cur));
+	{
+		exit_status = execute_builtin(cur);
+		ft_safe_calloc(-1, -1, NULL);
+		exit(exit_status);
+	}
 	cmd_path = ft_get_cmd_path(cur->cmd, cur->env);
 	if (cmd_path == NULL)
 		exit_cmd(cur->cmd);
