@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 13:51:09 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 14:01:56 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,18 @@ void	loop_out(t_cmd_group *cur)
 	while (cur_out)
 	{
 		close_fd(cur->out_fd);
-		if (check_out_access(cur_out->filename, cur) == -1)
-		{
-			cur->is_error = true;
-			return ;
-		}
 		if (cur_out->is_append)
 			cur->out_fd = open(cur_out->filename,
 					O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
 			cur->out_fd = open(cur_out->filename,
 					O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (cur->out_fd == -1)
+		{
+			check_out_access(cur_out->filename, cur);
+			cur->is_error = true;
+			return ;
+		}
 		cur_out = cur_out->next;
 	}
 }
