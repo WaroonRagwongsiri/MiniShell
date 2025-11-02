@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:26:20 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 09:10:37 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/02 13:26:05 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	exit_msg(char *msg)
 {
-	ft_putendl_fd(msg, 2);
+	if (msg)
+		ft_putendl_fd(msg, 2);
 	ft_safe_calloc(-1, -1, NULL);
 	//rl_clear_history();
 	clear_history(); // for macos
@@ -29,4 +30,10 @@ void	exit_cmd(char *cmd)
 	//rl_clear_history();
 	clear_history(); // for macos
 	exit(127);
+}
+
+void	exit_errno(int exit_status)
+{
+	ft_safe_calloc(-1, -1, NULL);
+	exit(exit_status);
 }

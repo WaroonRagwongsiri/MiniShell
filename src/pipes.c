@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 12:54:41 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 13:25:13 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,22 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 	t_cmd_group	*cur;
 	int			i;
 	char		*cmd_path;
-	int			exit_status;
 
 	i = -1;
 	cur = cmd_lines;
 	while (++i < index && cur)
 		cur = cur->next;
+	if (cur->is_error)
+	{
+		close_all(pipes, process_num, cmd_lines);
+		exit_msg(NULL);
+	}
 	dup_process(index, pipes, cur, process_num);
 	close_all(pipes, process_num, cmd_lines);
 	if (cur->argv
 		&& cur->argv[0]
 		&& is_builtin(cur->argv[0]))
-	{
-		exit_status = execute_builtin(cur);
-		ft_safe_calloc(-1, -1, NULL);
-		exit(exit_status);
-	}
+		exit_errno(execute_builtin(cur));
 	cmd_path = ft_get_cmd_path(cur->cmd, cur->env);
 	if (cmd_path == NULL)
 		exit_cmd(cur->cmd);

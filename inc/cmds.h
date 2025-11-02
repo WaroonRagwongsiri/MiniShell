@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/01 10:37:19 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/02 13:55:27 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_cmd_group
 	char				*lim;
 	struct s_infiles	*in_files;
 	struct s_outfiles	*out_files;
+	bool				is_error;
 	struct s_cmd_group	*next;
 	struct s_cmd_group	*prev;
 }	t_cmd_group;
@@ -75,13 +76,20 @@ void		close_all(int pipes[MAX_PIPE][2], int process_num,
 				t_cmd_group *cmd_lines);
 void		exec(int index, int pipes[MAX_PIPE][2],
 				t_cmd_group *cmd_lines, int process_num);
+
+// Heredocs
 int			heredoc(t_cmd_group *cur);
 void		read_til_lim(t_cmd_group *cur);
 void		loop_heredoc(t_cmd_group *cmd_lines);
+
+// Iofiles
 void		loop_open(t_cmd_group *cmd_lines);
 void		loop_in(t_cmd_group *cur);
 void		loop_out(t_cmd_group *cur);
 t_infiles	*new_infile(char *filename, bool is_h, char *lim);
 t_outfiles	*new_outfile(char *filename, bool is_append);
+int			check_in_access(char *filename, t_cmd_group *cur);
+int			check_out_access(char *filename, t_cmd_group *cur);
+void		fd_error_once(char *filename, t_cmd_group *cur, char *msg);
 
 #endif
