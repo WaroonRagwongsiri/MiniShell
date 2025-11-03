@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 13:16:28 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/03 16:18:18 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:34:08 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	is_directory(char *cmdpath)
 static char	*check_cmd_path(char *cmdpath)
 {
 	if (!cmdpath)
-		exit_cmd(cmdpath, "", 0);
+		exit_cmd(cmdpath, ":  command not found", 127);
 	if (is_directory(cmdpath))
 		exit_cmd(cmdpath, ": Is a directory", 126);
 	if (access(cmdpath, F_OK) == -1)
