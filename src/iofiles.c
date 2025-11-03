@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 21:59:12 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:43:01 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	loop_open(t_cmd_group *cmd_lines)
 	t_cmd_group	*cur;
 
 	cur = cmd_lines;
-	while (cur)
+	while (cur && g_status != SIGINT)
 	{
 		loop_in(cur);
 		loop_out(cur);
@@ -30,7 +30,7 @@ void	loop_in(t_cmd_group *cur)
 	t_infiles	*cur_in;
 
 	cur_in = cur->in_files;
-	while (cur_in)
+	while (cur_in && g_status != SIGINT)
 	{
 		close_old(cur);
 		if (check_in_access(cur_in->filename, cur) == -1)
@@ -42,7 +42,7 @@ void	loop_in(t_cmd_group *cur)
 		{
 			cur->is_heredoc = true;
 			cur->lim = cur_in->lim;
-			if (heredoc(cur) == -1)
+			if (heredoc(cur) != 0)
 			{
 				cur->is_error = true;
 				return ;
@@ -59,7 +59,7 @@ void	loop_out(t_cmd_group *cur)
 	t_outfiles	*cur_out;
 
 	cur_out = cur->out_files;
-	while (cur_out)
+	while (cur_out && g_status != SIGINT)
 	{
 		close_fd(cur->out_fd);
 		if (cur_out->is_append)

@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 22:37:01 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 22:08:53 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:44:30 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,17 @@ int	heredoc(t_cmd_group *cur)
 		read_til_lim(cur);
 		exit_errno(0);
 	}
-	else
-	{
-		close_fd(cur->h_pipe[1]);
-		cur->in_fd = cur->h_pipe[0];
-		waitpid(pid, &exit_status, 0);
-		if (exit_status != 0)
-			return (-1);
-		}
-		return (0);
-	}
+	signal_handler(MAIN_HEREDOC);
+	close_fd(cur->h_pipe[1]);
+	cur->in_fd = cur->h_pipe[0];
+	waitpid(pid, &exit_status, 0);
+	signal_handler(MAIN);
+	if (WIFSIGNALED(exit_status) && WTERMSIG(exit_status) == SIGINT)
+		g_status = SIGINT;
+	else if (WIFEXITED(exit_status) && WEXITSTATUS(exit_status) == 130)
+		g_status = SIGINT;
+	return (exit_status);
+}
 
 void	loop_heredoc(t_cmd_group *cmd_lines)
 {
