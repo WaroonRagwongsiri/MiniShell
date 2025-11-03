@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 22:37:01 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/03 10:27:46 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:36:45 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	loop_heredoc(t_cmd_group *cmd_lines)
 
 void	heredoc_eof(t_cmd_group *cur)
 {
-	ft_putstr_fd(get_prompt(cur->env), 2);
+	ft_putstr_fd(get_prompt(cur->env_ptr), 2);
 	ft_putstr_fd("warning: here-document delimited by end-of-file ", 2);
-	ft_putstr_fd(get_prompt(cur->env), 2);
+	ft_putstr_fd(get_prompt(cur->env_ptr), 2);
 	ft_putstr_fd("wanted: ", 2);
 	ft_putendl_fd(cur->lim, 2);
 }

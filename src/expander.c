@@ -6,13 +6,13 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 08:33:10 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 12:01:11 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:26:40 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static char	*expand_token(char *token, char **env, int *exit_status)
+static char	*expand_token(char *token, char ***env_ptr, int *exit_status)
 {
 	char	*key;
 	char	*value;
@@ -28,7 +28,7 @@ static char	*expand_token(char *token, char **env, int *exit_status)
 		if (key[i] == '?')
 			value = ft_itoa(*exit_status);
 		else
-			value = ft_getenv(env, key);
+			value = ft_getenv(*env_ptr, key);
 		if (value != NULL)
 			return (value);
 		return (NULL);
@@ -37,7 +37,7 @@ static char	*expand_token(char *token, char **env, int *exit_status)
 		return (NULL);
 }
 
-void	expand_tokens(char **tokens, char **env, int *exit_status)
+void	expand_tokens(char **tokens, char ***env_ptr, int *exit_status)
 {
 	int		i;
 	char	*expanded;
@@ -49,7 +49,7 @@ void	expand_tokens(char **tokens, char **env, int *exit_status)
 	{
 		if (ft_strchr(tokens[i], '$') != NULL)
 		{
-			expanded = expand_token(tokens[i], env, exit_status);
+			expanded = expand_token(tokens[i], env_ptr, exit_status);
 			if (expanded != NULL)
 				tokens[i] = expanded;
 		}

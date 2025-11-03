@@ -6,7 +6,7 @@
 #    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/03 08:57:27 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/11/03 13:28:26 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,10 @@ ifeq ($(shell uname),Darwin)
 	INCLUDES += -I $(READLINE_PATH)/include
 	LIBS += -L $(READLINE_PATH)/lib 
 endif
+
+# define hostname
+HOST = $(shell hostname -s)
+INCLUDES += -D HOSTNAME=\"$(HOST)\"
 
 # --- Source Files ---
 SRC_FILES = main.c \
