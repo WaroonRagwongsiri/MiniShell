@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 17:30:41 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:26:29 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	exec_cmd(t_cmd_group *cmd_lines)
 	process_num = cmd_len(cmd_lines);
 	if (cmd_lines == NULL || process_num == 0)
 		return (0);
-	loop_open(cmd_lines);
 	if (open_pipes(pipes, process_num) == -1)
 		exit_msg(PIPE_ERR);
 	i = -1;
@@ -38,7 +37,7 @@ int	exec_cmd(t_cmd_group *cmd_lines)
 		cur = cur->next;
 	}
 	close_all(pipes, process_num, cmd_lines);
-	return (wait_pid_process(pid, process_num));
+	return (wait_pid_process(pid, process_num, cmd_lines));
 }
 
 void	dup_process(int index, int pipes[MAX_PIPE][2],
@@ -66,18 +65,21 @@ void	dup_process(int index, int pipes[MAX_PIPE][2],
 	}
 }
 
-int	wait_pid_process(int pid[MAX_PROCESS], int process_num)
+int	wait_pid_process(int pid[MAX_PROCESS], int process_num,
+	t_cmd_group *cmd_lines)
 {
-	int	status[MAX_PROCESS];
-	int	closed[MAX_PROCESS];
-	int	closed_process;
-	int	i;
+	int			status[MAX_PROCESS];
+	int			closed[MAX_PROCESS];
+	int			closed_process;
+	t_cmd_group	*cur;
+	int			i;
 
 	ft_bzero(closed, sizeof(closed));
 	closed_process = 0;
 	while (closed_process < process_num)
 	{
 		i = -1;
+		cur = cmd_lines;
 		while (++i < process_num)
 		{
 			if (closed[i])
@@ -86,7 +88,9 @@ int	wait_pid_process(int pid[MAX_PROCESS], int process_num)
 			{
 				closed[i] = 1;
 				closed_process++;
+				cur->exit_status = status[i];
 			}
+			cur = cur->next;
 		}
 	}
 	print_sig_exit(status[process_num - 1]);
@@ -116,7 +120,7 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 	if (cur->is_error)
 	{
 		close_all(pipes, process_num, cmd_lines);
-		exit_msg(NULL);
+		exit_errno(cur->exit_status);
 	}
 	dup_process(index, pipes, cur, process_num);
 	close_all(pipes, process_num, cmd_lines);

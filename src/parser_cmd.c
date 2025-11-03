@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/02 13:18:36 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:46:31 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_cmd_node(t_cmd_group *node, char *segment,
 	node->in_files = NULL;
 	node->out_files = NULL;
 	node->is_error = false;
+	node->exit_status = 0;
 	set_in_files(node);
 	set_out_files(node);
 }

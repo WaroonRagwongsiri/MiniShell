@@ -6,7 +6,7 @@
 #    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/02 14:30:12 by waragwon         ###   ########.fr        #
+#    Updated: 2025/11/03 12:23:23 by waragwon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 # --- Compiler and Flags ---
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 INCLUDES = -I $(INC_DIR) -I $(LIBFT_DIR) 
 LIBS = -L $(LIBFT_DIR) -lft -lreadline #-lhistory
 
