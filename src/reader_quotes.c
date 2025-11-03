@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 08:53:52 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 10:26:55 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:07:40 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ static char	*append_line(char *curr, char *next)
 static bool	read_and_append(char **line, char missing_quote)
 {
 	char	*next_line;
+	char	*temp_next_line;
 	char	*merged;
 
 	next_line = readline(quote_prompt(missing_quote));
 	if (next_line == NULL)
 		return (false);
-	merged = append_line(*line, next_line);
+	temp_next_line = ft_strdup(next_line);
+	free(next_line);
+	merged = append_line(*line, temp_next_line);
 	if (merged == NULL)
 	{
 		*line = NULL;
