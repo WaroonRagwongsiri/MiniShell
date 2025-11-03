@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iofiles_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 17:54:55 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:36:57 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	fd_error_once(char *filename, t_cmd_group *cur, char *msg)
 {
 	if (!cur->is_error)
 	{
-		ft_putstr_fd(get_prompt(cur->env), 2);
+		ft_putstr_fd(get_prompt(cur->env_ptr), 2);
 		ft_putstr_fd(filename, 2);
 		ft_putendl_fd(msg, 2);
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_buildin.c                                     :+:      :+:    :+:   */
+/*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:25:22 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/30 20:21:37 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:32:41 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	execute_builtin(t_cmd_group *cmd)
 	if (ft_strncmp(cmd->argv[0], "env", 4) == 0)
 		return (builtin_env(cmd));
 	if (ft_strncmp(cmd->argv[0], "export", 7) == 0)
-		return (builtin_export(cmd, &cmd->env));
+		return (builtin_export(cmd, cmd->env_ptr));
 	if (ft_strncmp(cmd->argv[0], "unset", 6) == 0)
-		return (builtin_unset(cmd, &cmd->env));
+		return (builtin_unset(cmd, cmd->env_ptr));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 08:40:30 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:35:30 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	**init_environment(char **env)
 	return (mini_env);
 }
 
-static void	run_shell(char **mini_env)
+static void	run_shell(char ***env_ptr)
 {
 	char		*line;
 	t_cmd_group	*cmd_lines;
@@ -41,16 +41,14 @@ static void	run_shell(char **mini_env)
 	while (true)
 	{
 		signal_handler(MAIN);
-		line = reader(mini_env);
+		line = reader(env_ptr);
 		if (line == NULL)
 			exit_after_reader();
-		cmd_lines = init_cmd_group(line, mini_env, &exit_status);
+		cmd_lines = init_cmd_group(line, env_ptr, &exit_status);
 		if (DEBUG_MODE)
 			print_cmd_group(cmd_lines);
 		free(line);
-		exit_status = execute_command(cmd_lines, mini_env);
-		if (cmd_lines != NULL)
-			mini_env = cmd_lines->env;
+		exit_status = execute_command(cmd_lines, env_ptr);
 	}
 }
 
@@ -61,7 +59,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1 || av[0] == NULL)
 		return (EXIT_FAILURE);
 	mini_env = init_environment(env);
-	run_shell(mini_env);
+	run_shell(&mini_env);
 	return (EXIT_SUCCESS);
 }
 

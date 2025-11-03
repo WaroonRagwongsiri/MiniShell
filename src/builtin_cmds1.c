@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 12:46:48 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:35:24 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,23 @@ int	builtin_pwd(t_cmd_group *cmd)
 	return (1);
 }
 
+static void	update_pwd(char ***env_ptr)
+{
+	char	cwd[PATH_MAX];
+	char	*new_pwd;
+
+	new_pwd = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
+	if (new_pwd != NULL)
+		set_env_var(env_ptr, new_pwd);
+}
+
 int	builtin_cd(t_cmd_group *cmd)
 {
 	char	*path;
 
 	if (cmd->argv[1] == NULL)
 	{
-		path = ft_getenv(cmd->env, "HOME");
+		path = ft_getenv(*(cmd->env_ptr), "HOME");
 		if (path == NULL)
 		{
 			ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
@@ -78,6 +88,7 @@ int	builtin_cd(t_cmd_group *cmd)
 		close_builtin_fds(cmd);
 		return (1);
 	}
+	update_pwd(cmd->env_ptr);
 	close_builtin_fds(cmd);
 	return (0);
 }
@@ -92,18 +103,4 @@ int	builtin_exit(t_cmd_group *cmd)
 		exit_code = ft_atoi(cmd->argv[1]);
 	close_builtin_fds(cmd);
 	exit(exit_code);
-}
-
-int	builtin_env(t_cmd_group *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd->env[i] != NULL)
-	{
-		ft_putendl_fd(cmd->env[i], STDOUT_FILENO);
-		i++;
-	}
-	close_builtin_fds(cmd);
-	return (0);
 }

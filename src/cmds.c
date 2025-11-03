@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:09:15 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/01 09:41:09 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/03 12:35:10 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd_group	*simple_new_cmd(char **argv, char **env)
+t_cmd_group	*simple_new_cmd(char **argv, char ***env_ptr)
 {
 	t_cmd_group	*new;
 
@@ -21,7 +21,7 @@ t_cmd_group	*simple_new_cmd(char **argv, char **env)
 		return (NULL);
 	new->argv = argv;
 	new->cmd = argv[0];
-	new->env = env;
+	new->env_ptr = env_ptr;
 	new->in_filenames = NULL;
 	new->out_filenames = NULL;
 	new->operator = NONE;
