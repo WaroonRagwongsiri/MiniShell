@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:26:20 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/03 08:40:21 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:50:27 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	exit_msg(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	exit_cmd(char *cmd)
+void	exit_cmd(char *cmd, char *err_msg, int exit_status)
 {
 	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putendl_fd(": command not found", STDERR_FILENO);
+	ft_putendl_fd(err_msg, STDERR_FILENO);
 	ft_safe_calloc(-1, -1, NULL);
 	rl_clear_history();
-	exit(127);
+	exit(exit_status);
 }
 
 void	exit_errno(int exit_status)

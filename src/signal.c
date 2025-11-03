@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 14:17:50 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/03 11:40:29 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:02:48 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ void	signal_handler(t_sig_mode mode)
 	{
 		signal(SIGINT, child_interrupt);
 		signal(SIGQUIT, child_quit);
+	}
+	else if (mode == MAIN_CHILD)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (mode == HEREDOC)
 	{

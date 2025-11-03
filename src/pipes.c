@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/03 12:26:29 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:05:34 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	wait_pid_process(int pid[MAX_PROCESS], int process_num,
 	t_cmd_group	*cur;
 	int			i;
 
+	signal_handler(MAIN_CHILD);
 	ft_bzero(closed, sizeof(closed));
 	closed_process = 0;
 	while (closed_process < process_num)
@@ -93,8 +94,13 @@ int	wait_pid_process(int pid[MAX_PROCESS], int process_num,
 			cur = cur->next;
 		}
 	}
+	signal_handler(MAIN);
 	print_sig_exit(status[process_num - 1]);
-	return (WEXITSTATUS(status[process_num - 1]));
+	if (WIFEXITED(status[process_num - 1]))
+		return (WEXITSTATUS(status[process_num - 1]));
+	else if (WIFSIGNALED(status[process_num - 1]))
+		return (128 + WTERMSIG(status[process_num - 1]));
+	return (0);
 }
 
 void	print_sig_exit(int status)
@@ -128,9 +134,9 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 		&& cur->argv[0]
 		&& is_builtin(cur->argv[0]))
 		exit_errno(execute_builtin(cur));
-	cmd_path = ft_get_cmd_path(cur->cmd, cur->env);
+	cmd_path = find_cmd(cur->cmd, cur->env);
 	if (cmd_path == NULL)
-		exit_cmd(cur->cmd);
+		exit_cmd(cur->cmd, ": command not found", 127);
 	execve(cmd_path, cur->argv, cur->env);
 	exit_msg("Execve");
 }
