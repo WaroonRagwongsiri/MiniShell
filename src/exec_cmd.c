@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 21:43:30 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/03 12:10:13 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	execute_command(t_cmd_group *cmd_lines, char **env)
 {
 	int			process_num;
+	int			exit_status;
 
 	(void)env;
 	process_num = cmd_len(cmd_lines);
@@ -25,9 +26,16 @@ int	execute_command(t_cmd_group *cmd_lines, char **env)
 		&& cmd_lines->argv[0] != NULL
 		&& is_builtin(cmd_lines->argv[0]))
 	{
-		loop_open(cmd_lines);
+		exit_status = loop_open(cmd_lines);
+		if (exit_status != 0)
+			return (exit_status);
 		return (execute_builtin(cmd_lines));
 	}
 	else
+	{
+		exit_status = loop_open(cmd_lines);
+		if (exit_status != 0)
+			return (exit_status);
 		return (exec_cmd(cmd_lines));
+	}
 }
