@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
 /*   Updated: 2025/11/03 13:35:24 by pioncha2         ###   ########.fr       */
@@ -30,13 +30,13 @@ int	builtin_echo(t_cmd_group *cmd)
 	}
 	while (cmd->argv[i] != NULL)
 	{
-		ft_putstr_fd(cmd->argv[i], cmd->out_fd);
+		ft_putstr_fd(cmd->argv[i], STDOUT_FILENO);
 		if (cmd->argv[i + 1] != NULL)
-			ft_putstr_fd(" ", cmd->out_fd);
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
 	if (newline)
-		ft_putstr_fd("\n", cmd->out_fd);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	close_builtin_fds(cmd);
 	return (0);
 }
@@ -47,7 +47,7 @@ int	builtin_pwd(t_cmd_group *cmd)
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		ft_putendl_fd(cwd, cmd->out_fd);
+		ft_putendl_fd(cwd, STDOUT_FILENO);
 		close_builtin_fds(cmd);
 		return (0);
 	}
@@ -98,7 +98,7 @@ int	builtin_exit(t_cmd_group *cmd)
 	int	exit_code;
 
 	exit_code = 0;
-	ft_putendl_fd("exit", cmd->out_fd);
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (cmd->argv[1] != NULL)
 		exit_code = ft_atoi(cmd->argv[1]);
 	close_builtin_fds(cmd);

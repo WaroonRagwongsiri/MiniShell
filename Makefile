@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
+#    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
 #    Updated: 2025/11/03 13:28:26 by pioncha2         ###   ########.fr        #
@@ -25,7 +25,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 # --- Compiler and Flags ---
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 INCLUDES = -I $(INC_DIR) -I $(LIBFT_DIR) 
 LIBS = -L $(LIBFT_DIR) -lft -lreadline -lhistory
 
@@ -68,7 +68,8 @@ SRC_FILES = main.c \
 			iofiles.c \
 			iofiles_utils.c \
 			expander.c \
-			signal.c 
+			signal.c \
+			utils_cmd_path.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

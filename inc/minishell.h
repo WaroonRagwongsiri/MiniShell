@@ -3,11 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
 /*   Updated: 2025/11/03 13:22:32 by pioncha2         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -24,6 +26,7 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include "../lib/libft/inc/libft.h"
 # include "cmds.h"
 
@@ -37,7 +40,9 @@ typedef enum s_sig_mode
 {
 	MAIN,
 	CHILD,
-	HEREDOC
+	MAIN_CHILD,
+	HEREDOC,
+	MAIN_HEREDOC
 }	t_sig_mode;
 
 // utils_tab.c
@@ -101,7 +106,7 @@ int			execute_command(t_cmd_group *cmd_lines, char ***env_ptr);
 
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
-char		*ft_get_cmd_path(char *cmd, char **env);
+char		*find_cmd(char *cmd, char **env);
 
 // parser_cmd.c
 t_cmd_group	*init_cmd_group(char *line, char ***env_ptr, int *exit_status);
@@ -126,7 +131,7 @@ void		set_in_files(t_cmd_group *node);
 
 // Utils Exit
 void		exit_msg(char *msg);
-void		exit_cmd(char *cmd);
+void		exit_cmd(char *cmd, char *err_msg, int exit_status);
 void		exit_errno(int exit_status);
 
 // Signal

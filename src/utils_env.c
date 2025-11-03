@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 09:58:30 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 21:13:11 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/03 13:52:14 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,6 @@ char	*ft_getenv(char **env, char *key)
 			if (env[i][len_key] == '=')
 				return (&env[i][len_key + 1]);
 		}
-		i++;
-	}
-	return (NULL);
-}
-
-static char	*ft_build_path(char *path, char *cmd)
-{
-	char	*temp_path;
-	char	*cmd_path;
-
-	temp_path = ft_strjoin(path, "/");
-	cmd_path = ft_strjoin(temp_path, cmd);
-	return (cmd_path);
-}
-
-char	*ft_get_cmd_path(char *cmd, char **env)
-{
-	int		i;
-	char	**paths;
-	char	*cmd_path;
-	char	*env_var;
-
-	i = 0;
-	env_var = ft_getenv(env, "PATH");
-	if (env_var == NULL)
-		return (NULL);
-	paths = ft_split(env_var, ':');
-	i = 0;
-	while (paths[i] != NULL)
-	{
-		cmd_path = ft_build_path(paths[i], cmd);
-		if (access(cmd_path, F_OK) == 0)
-			return (cmd_path);
 		i++;
 	}
 	return (NULL);

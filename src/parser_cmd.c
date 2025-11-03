@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
 /*   Updated: 2025/11/03 12:26:24 by pioncha2         ###   ########.fr       */
@@ -30,6 +30,7 @@ static void	init_cmd_node(t_cmd_group *node, char *segment,
 	node->in_files = NULL;
 	node->out_files = NULL;
 	node->is_error = false;
+	node->exit_status = 0;
 	set_in_files(node);
 	set_out_files(node);
 }
