@@ -6,25 +6,34 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 16:01:36 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 18:38:35 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+static char	**tab_skip_empty(char **tab)
+{
+	int	i;
+
+	if (tab == NULL)
+		return (NULL);
+	i = 0;
+	while (tab[i] != NULL && ft_strlen(tab[i]) == 0)
+		i++;
+	if (i != 0)
+		tab = copy_tab(&tab[i]);
+	return (tab);
+}
+
 static void	init_cmd_node(t_cmd_group *node, char *segment,
 	char ***env_ptr, int *exit_status)
 {
-	char	*temp;
-	char	**temp_tab;
-
 	node->cmds_str = ft_strdup(segment);
-	temp_tab = tokenizer(segment);
-	expand_tokens(temp_tab, env_ptr, exit_status);
-	temp = join_tokens(temp_tab);
-	node->cmd_tokens = tokenizer(temp);
+	node->cmd_tokens = tokenizer(segment);
 	expand_tokens(node->cmd_tokens, env_ptr, exit_status);
 	tab_remove_quotes(node->cmd_tokens);
+	node->cmd_tokens = tab_skip_empty(node->cmd_tokens);
 	node->in_filenames = get_in_filenames(node->cmd_tokens);
 	node->out_filenames = get_out_filenames(node->cmd_tokens);
 	node->cmd = get_cmd(node->cmd_tokens);

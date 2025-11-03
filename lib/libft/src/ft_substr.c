@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:59:38 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/08/27 11:01:15 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 18:26:57 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	s_len = ft_strlen(s);
 	if (len > s_len - start)
 		len = s_len - start;
-	arr = malloc(len + 1);
+	arr = ft_safe_calloc(len + 1, sizeof(char), "");
 	if (arr == NULL)
 		return (NULL);
 	i = 0;
