@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 15:28:36 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:21:52 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	builtin_cd(t_cmd_group *cmd)
 	char	*path;
 
 	if (tab_len(cmd->argv) > 2)
-		return (ft_putstr_fd("cd: too many arguments\n", cmd->out_fd), 1);
+		return (ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO), 1);
 	if (cmd->argv[1] == NULL)
 	{
 		path = ft_getenv(*(cmd->env_ptr), "HOME");
