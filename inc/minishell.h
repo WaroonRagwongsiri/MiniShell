@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 16:02:32 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 18:48:27 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void		print_cmd_group(t_cmd_group	*g);
 
 // expander.c
 void		expand_tokens(char **tokens, char ***env_ptr, int *exit_status);
-char		*join_tokens(char **tokens);
 
 // builtin_cmd1.c
 int			builtin_echo(t_cmd_group *cmd);
