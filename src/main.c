@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 18:39:45 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 20:00:23 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static void	run_shell(char ***env_ptr)
 			exit_after_reader();
 		cmd_lines = init_cmd_group(line, env_ptr, &exit_status);
 		if (DEBUG_MODE)
+		{
+			print_tokens(line);
 			print_cmd_group(cmd_lines);
+		}
 		exit_status = execute_command(cmd_lines, env_ptr);
 	}
 }
