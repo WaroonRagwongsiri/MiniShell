@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/02 13:18:36 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 10:32:30 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	init_cmd_node(t_cmd_group *node, char *segment,
 {
 	node->cmds_str = ft_strdup(segment);
 	node->cmd_tokens = tokenizer(segment);
+	tab_remove_quotes(node->cmd_tokens);
 	expand_tokens(node->cmd_tokens, env, exit_status);
 	node->in_filenames = get_in_filenames(node->cmd_tokens);
 	node->out_filenames = get_out_filenames(node->cmd_tokens);

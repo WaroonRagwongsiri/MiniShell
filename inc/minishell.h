@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/02 15:34:10 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 10:32:47 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,18 @@ char		**append_tab(char **tab, char *str);
 char		*get_prompt(char **env);
 char		*reader(char **env);
 
+// reader_quotes.c
+bool		is_completed_quotes(char **line);
+
 // utils_check.c 
 bool		is_whitespace(char c);
 bool		is_quotation_mark(char c);
 bool		is_special_char(char c);
 bool		is_redirect_char(char c);
+
+// utils_quotes.c
+void		remove_quotes(char *str);
+void		tab_remove_quotes(char **tab);
 
 // tokernizer.c 
 char		**tokenizer(char *s);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/02 22:01:32 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 08:40:30 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	exit_after_reader(void)
 {
-	clear_history();
+	rl_clear_history();
 	ft_safe_calloc(-1, -1, NULL);
 	printf("\nexit\n");
 	exit(EXIT_SUCCESS);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
+#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/02 14:30:12 by waragwon         ###   ########.fr        #
+#    Updated: 2025/11/03 08:57:27 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,23 @@ LIBFT = $(LIBFT_DIR)/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I $(INC_DIR) -I $(LIBFT_DIR) 
-LIBS = -L $(LIBFT_DIR) -lft -lreadline #-lhistory
+LIBS = -L $(LIBFT_DIR) -lft -lreadline -lhistory
+
+# For MacOS
+ifeq ($(shell uname),Darwin)
+	READLINE_PATH = $(shell brew --prefix readline)
+	INCLUDES += -I $(READLINE_PATH)/include
+	LIBS += -L $(READLINE_PATH)/lib 
+endif
 
 # --- Source Files ---
 SRC_FILES = main.c \
 			utils_tab.c \
 			utils_check.c \
 			utils_env.c \
+			utils_quotes.c \
 			reader.c \
+			reader_quotes.c \
 			tokenizer.c \
 			debug.c \
 			exec_cmd.c \
@@ -55,7 +64,7 @@ SRC_FILES = main.c \
 			iofiles.c \
 			iofiles_utils.c \
 			expander.c \
-			signal.c
+			signal.c 
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
