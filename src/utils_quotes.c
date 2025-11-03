@@ -6,16 +6,17 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 08:41:31 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 11:53:49 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:27:51 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	remove_quotes(char *str, char quote)
+void	remove_quotes(char *str)
 {
 	int		i;
 	int		j;
+	char	quote;
 
 	if (str == NULL)
 		return ;
@@ -23,8 +24,9 @@ void	remove_quotes(char *str, char quote)
 	j = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == quote)
+		if (str[i] == '\'' || str[i] == '\"')
 		{
+			quote = str[i];
 			i++;
 			while (str[i] != '\0' && str[i] != quote)
 				str[j++] = str[i++];
@@ -37,7 +39,7 @@ void	remove_quotes(char *str, char quote)
 	str[j] = '\0';
 }
 
-void	tab_remove_quotes(char **tab, char quote)
+void	tab_remove_quotes(char **tab)
 {
 	int	i;
 
@@ -46,7 +48,7 @@ void	tab_remove_quotes(char **tab, char quote)
 		return ;
 	while (tab[i] != NULL)
 	{
-		remove_quotes(tab[i], quote);
+		remove_quotes(tab[i]);
 		i++;
 	}
 }

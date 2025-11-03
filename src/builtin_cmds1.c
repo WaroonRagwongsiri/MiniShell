@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 13:35:24 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:00:49 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #define PATH_MAX 1024
 
-/*
-TODO : handle echo with " "
-*/
 int	builtin_echo(t_cmd_group *cmd)
 {
 	int		i;
@@ -70,6 +67,8 @@ int	builtin_cd(t_cmd_group *cmd)
 {
 	char	*path;
 
+	if (tab_len(cmd->argv) > 2)
+		return (ft_putstr_fd("cd: too many arguments\n", cmd->out_fd), 1);
 	if (cmd->argv[1] == NULL)
 	{
 		path = ft_getenv(*(cmd->env_ptr), "HOME");
@@ -96,11 +95,27 @@ int	builtin_cd(t_cmd_group *cmd)
 int	builtin_exit(t_cmd_group *cmd)
 {
 	int	exit_code;
+	int	i;
 
 	exit_code = 0;
-	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (cmd->argv[1] != NULL)
 		exit_code = ft_atoi(cmd->argv[1]);
+	i = 0;
+	while (cmd->argv[1][i] != '\0' && tab_len(cmd->argv) == 2)
+	{
+		if (ft_isalpha(cmd->argv[1][i]))
+		{
+			ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
+			return (close_builtin_fds(cmd), 2);
+		}
+		i++;
+	}
+	if (tab_len(cmd->argv) > 2)
+	{
+		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
+		return (close_builtin_fds(cmd), 1);
+	}
 	close_builtin_fds(cmd);
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	exit(exit_code);
 }

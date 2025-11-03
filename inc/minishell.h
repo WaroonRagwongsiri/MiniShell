@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 13:22:32 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:28:04 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ bool		is_special_char(char c);
 bool		is_redirect_char(char c);
 
 // utils_quotes.c
-void		remove_quotes(char *str, char quote);
-void		tab_remove_quotes(char **tab, char quote);
+void		remove_quotes(char *str);
+void		tab_remove_quotes(char **tab);
 
 // tokernizer.c 
 char		**tokenizer(char *s);
