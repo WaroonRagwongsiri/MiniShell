@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/11/03 11:53:23 by pioncha2         ###   ########.fr       */
-=======
-/*   Updated: 2025/11/03 11:25:22 by waragwon         ###   ########.fr       */
->>>>>>> 1c7554f ("Interrupt Heredoc")
+/*   Updated: 2025/11/03 14:11:42 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +33,8 @@ typedef enum s_sig_mode
 {
 	MAIN,
 	CHILD,
+	HEREDOC,
+	MAIN_HEREDOC
 	HEREDOC,
 	MAIN_HEREDOC
 }	t_sig_mode;
