@@ -6,30 +6,39 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/03 11:43:01 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:36:23 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	loop_open(t_cmd_group *cmd_lines)
+int	loop_open(t_cmd_group *cmd_lines)
 {
 	t_cmd_group	*cur;
 
 	cur = cmd_lines;
 	while (cur && g_status != SIGINT)
 	{
-		loop_in(cur);
-		loop_out(cur);
+		cur->exit_status = loop_in(cur);
+		if (g_status == SIGINT)
+			return (cur->exit_status);
+		if (cur->exit_status == 0)
+			cur->exit_status = loop_out(cur);
 		cur = cur->next;
 	}
+	cur = cmd_lines;
+	while (cur->next)
+		cur = cur->next;
+	return (cur->exit_status);
 }
 
-void	loop_in(t_cmd_group *cur)
+int	loop_in(t_cmd_group *cur)
 {
 	t_infiles	*cur_in;
 
 	cur_in = cur->in_files;
+	if (!cur_in)
+		return (0);
 	while (cur_in && g_status != SIGINT)
 	{
 		close_old(cur);
@@ -37,6 +46,7 @@ void	loop_in(t_cmd_group *cur)
 		{
 			cur->is_error = true;
 			cur_in = cur_in->next;
+			continue ;
 		}
 		if (cur_in->is_heredoc)
 		{
@@ -45,20 +55,29 @@ void	loop_in(t_cmd_group *cur)
 			if (heredoc(cur) != 0)
 			{
 				cur->is_error = true;
-				return ;
+				return (130);
 			}
 		}
 		else
+		{
+			cur->is_heredoc = false;
 			cur->in_fd = open(cur_in->filename, O_RDONLY);
+		}
 		cur_in = cur_in->next;
 	}
+	cur_in = cur->in_files;
+	while (cur_in->next)
+		cur_in = cur_in->next;
+	return (cur->is_error);
 }
 
-void	loop_out(t_cmd_group *cur)
+int	loop_out(t_cmd_group *cur)
 {
 	t_outfiles	*cur_out;
 
 	cur_out = cur->out_files;
+	if (!cur_out)
+		return (0);
 	while (cur_out && g_status != SIGINT)
 	{
 		close_fd(cur->out_fd);
@@ -72,10 +91,11 @@ void	loop_out(t_cmd_group *cur)
 		{
 			check_out_access(cur_out->filename, cur);
 			cur->is_error = true;
-			return ;
+			return (1);
 		}
 		cur_out = cur_out->next;
 	}
+	return (0);
 }
 
 t_infiles	*new_infile(char *filename, bool is_h, char *lim)
