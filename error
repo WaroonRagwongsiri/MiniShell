@@ -19,14 +19,6 @@ Test  15: ❌ echo "exit_code ->$? user ->$USER home -> $HOME"
 mini output = (exit_code ->$? user ->$USER home -> $HOME)
 bash output = (exit_code ->0 user ->pioncha2 home -> /home/pioncha2)
 
-Test  17: ❌ echo "$" 
-mini output = ()
-bash output = ($)
-
-Test  19: ❌ echo $ 
-mini output = ()
-bash output = ($)
-
 Test  36: ❌ unset HOME 
 mini output = (pioncha2@z2t12c4:~/home/pioncha2/Workspace/09_Minishell/working_v4_git/minishell_tester $ )
 bash output = ()
