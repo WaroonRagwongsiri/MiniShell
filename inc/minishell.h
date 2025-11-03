@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 12:35:27 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:02:33 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include "../lib/libft/inc/libft.h"
 # include "cmds.h"
 
@@ -35,6 +36,7 @@ typedef enum s_sig_mode
 {
 	MAIN,
 	CHILD,
+	MAIN_CHILD,
 	HEREDOC,
 	MAIN_HEREDOC
 }	t_sig_mode;
@@ -100,7 +102,7 @@ int			execute_command(t_cmd_group *cmd_lines, char **env);
 
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
-char		*ft_get_cmd_path(char *cmd, char **env);
+char		*find_cmd(char *cmd, char **env);
 
 // parser_cmd.c
 t_cmd_group	*init_cmd_group(char *line, char **env, int *exit_status);
@@ -125,7 +127,7 @@ void		set_in_files(t_cmd_group *node);
 
 // Utils Exit
 void		exit_msg(char *msg);
-void		exit_cmd(char *cmd);
+void		exit_cmd(char *cmd, char *err_msg, int exit_status);
 void		exit_errno(int exit_status);
 
 // Signal
