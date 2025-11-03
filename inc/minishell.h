@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 10:32:47 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:53:23 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ bool		is_special_char(char c);
 bool		is_redirect_char(char c);
 
 // utils_quotes.c
-void		remove_quotes(char *str);
-void		tab_remove_quotes(char **tab);
+void		remove_quotes(char *str, char quote);
+void		tab_remove_quotes(char **tab, char quote);
 
 // tokernizer.c 
 char		**tokenizer(char *s);

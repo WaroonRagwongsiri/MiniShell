@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:17:28 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/08/27 10:21:07 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:56:31 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (end > start && ft_is_charset(s1[end], set))
 		end--;
 	size = end - start + 1;
-	arr = malloc(size + 1);
+	arr = ft_safe_calloc(size + 1, sizeof(char), "");
 	if (arr == NULL)
 		return (NULL);
 	ft_memcpy(arr, s1 + start, size);
