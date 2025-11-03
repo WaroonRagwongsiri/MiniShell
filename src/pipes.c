@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/03 12:36:14 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:22:15 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,9 @@ void	exec(int index, int pipes[MAX_PIPE][2],
 		&& cur->argv[0]
 		&& is_builtin(cur->argv[0]))
 		exit_errno(execute_builtin(cur));
-	cmd_path = ft_get_cmd_path(cur->cmd, *(cur->env_ptr));
+	cmd_path = find_cmd(cur->cmd, *(cur->env_ptr));
 	if (cmd_path == NULL)
-		exit_cmd(cur->cmd);
+		exit_cmd(cur->cmd, ": command not found", 127);
 	execve(cmd_path, cur->argv, *(cur->env_ptr));
 	exit_msg("Execve");
 }
