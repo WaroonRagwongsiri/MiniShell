@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 15:32:34 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:57:55 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*reader(char ***env_ptr)
 {
 	char	*prompt;
 	char	*line;
+	char	*tmp_line;
 
 	prompt = get_prompt(env_ptr);
 	if (prompt == NULL)
@@ -79,13 +80,15 @@ char	*reader(char ***env_ptr)
 	line = readline(prompt);
 	if (line == NULL)
 		return (NULL);
-	if (!is_completed_quotes(&line) && line == NULL)
+	tmp_line = ft_strdup(line);
+	free(line);
+	if (!is_completed_quotes(&tmp_line) && tmp_line == NULL)
 	{
-		line = ft_strdup("");
-		if (line == NULL)
+		tmp_line = ft_strdup("");
+		if (tmp_line == NULL)
 			return (NULL);
 	}
-	if (line != NULL && ft_strlen(line) > 0)
-		add_history(line);
-	return (line);
+	if (tmp_line != NULL && ft_strlen(tmp_line) > 0)
+		add_history(tmp_line);
+	return (tmp_line);
 }
