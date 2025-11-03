@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iofiles_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/03 12:36:57 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 20:36:48 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_out_access(char *filename, t_cmd_group *cur)
 {
 	if (!filename)
 	{
-		fd_error_once(filename, cur, ": No such file or directory");
+		fd_error_once(filename, cur, ": Permission denied");
 		return (-1);
 	}
 	if (access(filename, W_OK) == -1)
