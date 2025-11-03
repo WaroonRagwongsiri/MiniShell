@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:15:49 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/02 15:00:00 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:47:25 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	builtin_export(t_cmd_group *cmd, char ***env)
 
 	if (cmd->argv[1] == NULL)
 	{
-		print_env(*env, cmd->out_fd);
+		print_env(*env, STDOUT_FILENO);
 		close_builtin_fds(cmd);
 		return (0);
 	}
