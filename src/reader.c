@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 13:36:10 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:32:34 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ void	prompt_cat(char *prompt, char *user, char *path, char *home)
 
 char	*get_prompt(char ***env_ptr)
 {
-	char	*path;
-	char	*home;
-	char	*user;
-	char	*prompt;
-	char	buffer[MAX_PROMPT];
+	static char	*prompt = NULL;
+	char		*path;
+	char		*home;
+	char		*user;
+	char		buffer[MAX_PROMPT];
 
-	prompt = NULL;
+	if (!env_ptr)
+		return (prompt);
 	path = ft_getenv(*env_ptr, "PWD");
 	if (path == NULL)
 		path = getcwd(buffer, MAX_PROMPT);

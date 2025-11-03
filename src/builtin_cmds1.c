@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 15:00:49 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:28:36 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,18 @@ int	builtin_exit(t_cmd_group *cmd)
 	int	i;
 
 	exit_code = 0;
+	if (cmd->argv[0] == NULL || cmd->argv[1] == NULL)
+		exit(0);
 	if (cmd->argv[1] != NULL)
 		exit_code = ft_atoi(cmd->argv[1]);
-	i = 0;
-	while (cmd->argv[1][i] != '\0' && tab_len(cmd->argv) == 2)
+	i = -1;
+	while (cmd->argv[1][++i] != '\0' && tab_len(cmd->argv) == 2)
 	{
 		if (ft_isalpha(cmd->argv[1][i]))
 		{
 			ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
 			return (close_builtin_fds(cmd), 2);
 		}
-		i++;
 	}
 	if (tab_len(cmd->argv) > 2)
 	{
