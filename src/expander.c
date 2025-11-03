@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 08:33:10 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 14:30:59 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:02:08 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static char	*expand_token(char *token, char ***env_ptr, int *exit_status)
 	{
 		key = ft_strdup(&token[i + 1]);
 		key = ft_strtrim(key, "\'\" ");
-		if (key[i] == '?')
-			value = ft_itoa(*exit_status);
+		if (key[0] == '?')
+			value = ft_strjoin(ft_itoa(*exit_status), ft_strdup(&token[1]));
 		else
 			value = ft_getenv(*env_ptr, key);
 		if (value != NULL)
 			return (value);
-		return (NULL);
+		return (ft_strdup(""));
 	}
 	else
 		return (NULL);
@@ -57,4 +57,20 @@ void	expand_tokens(char **tokens, char ***env_ptr, int *exit_status)
 		}
 		i++;
 	}
+}
+
+char	*join_tokens(char **tokens)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = ft_strdup("");
+	while (tokens[i] != NULL)
+	{
+		new = ft_strjoin(new, " ");
+		new = ft_strjoin(new, tokens[i]);
+		i++;
+	}
+	return (new);
 }
