@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 13:22:59 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:35:24 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,3 @@ int	builtin_exit(t_cmd_group *cmd)
 	close_builtin_fds(cmd);
 	exit(exit_code);
 }
-

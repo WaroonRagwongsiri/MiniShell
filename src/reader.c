@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:44 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:36:10 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*get_prompt(char ***env_ptr)
 	user = ft_getenv(*env_ptr, "USER");
 	if (user == NULL)
 		user = "user";
-	prompt = ft_safe_calloc(1, MAX_PROMPT , "");
+	prompt = ft_safe_calloc(1, MAX_PROMPT, "");
 	if (prompt == NULL)
 		return (NULL);
 	prompt_cat(prompt, user, path, home);

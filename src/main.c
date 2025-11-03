@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 12:48:15 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:35:30 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static void	run_shell(char ***env_ptr)
 			print_cmd_group(cmd_lines);
 		free(line);
 		exit_status = execute_command(cmd_lines, env_ptr);
-		// if (cmd_lines != NULL)
-		// 	*env_ptr = *(cmd_lines->env_ptr);
 	}
 }
 
