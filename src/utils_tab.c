@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:33:26 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 20:18:08 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:52:58 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,34 @@ char	**append_tab(char **tab, char *str)
 	if (new_tab[i] == NULL)
 		return (NULL);
 	new_tab[i + 1] = NULL;
+	return (new_tab);
+}
+
+char	**split_tokens(char **str)
+{
+	int		i;
+	int		j;
+	char	**new_tab;
+	char	*temp;
+
+	new_tab = ft_safe_calloc(tab_len(str) + 1, sizeof(char *), "");
+	i = 0;
+	j = 0;
+	temp = ft_strdup("");
+	while (str[j] != NULL)
+	{
+		if (ft_strncmp(str[j], "|", 2) != 0)
+		{
+			temp = ft_strjoin(temp, " ");
+			temp = ft_strjoin(temp, str[j]);
+		}
+		else
+		{
+			new_tab[i++] = ft_strdup(temp);
+			temp = ft_strdup("");
+		}
+		j++;
+	}
+	new_tab[i] = ft_strdup(temp);
 	return (new_tab);
 }

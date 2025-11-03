@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 18:38:35 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:52:54 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,10 @@ t_cmd_group	*init_cmd_group(char *line, char ***env_ptr, int *exit_status)
 	char		**tab;
 	t_cmd_group	*cmd_group;
 	int			size;
+	char		**tokens;
 
-	tab = ft_split(line, '|');
+	tokens = tokenizer(line);
+	tab = split_tokens(tokens);
 	size = tab_len(tab);
 	if (size < 1)
 		return (NULL);
