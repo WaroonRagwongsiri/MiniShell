@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 11:53:23 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:22:32 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # include "../lib/libft/inc/libft.h"
 # include "cmds.h"
 
+# ifndef HOSTNAME
+#  define HOSTNAME "host"
+# endif
+
 extern volatile sig_atomic_t	g_status;
 
 typedef enum s_sig_mode
@@ -43,8 +47,8 @@ int			tab_len(char **tab);
 char		**append_tab(char **tab, char *str);
 
 // reader.c
-char		*get_prompt(char **env);
-char		*reader(char **env);
+char		*get_prompt(char ***env_ptr);
+char		*reader(char ***env_ptr);
 
 // reader_quotes.c
 bool		is_completed_quotes(char **line);
@@ -67,7 +71,7 @@ void		print_tokens(char *line);
 void		print_cmd_group(t_cmd_group	*g);
 
 // expander.c
-void		expand_tokens(char **tokens, char **env, int *exit_status);
+void		expand_tokens(char **tokens, char ***env_ptr, int *exit_status);
 
 // builtin_cmd1.c
 int			builtin_echo(t_cmd_group *cmd);
@@ -78,8 +82,8 @@ int			builtin_env(t_cmd_group *cmd);
 
 // builtin_cmd2.c
 void		close_builtin_fds(t_cmd_group *cmd);
-int			builtin_export(t_cmd_group *cmd, char ***env);
-int			builtin_unset(t_cmd_group *cmd, char ***env);
+int			builtin_export(t_cmd_group *cmd, char ***env_ptr);
+int			builtin_unset(t_cmd_group *cmd, char ***env_ptr);
 
 // builtin_utils.c
 bool		is_valid_identifier(char *arg);
@@ -93,14 +97,14 @@ int			is_builtin(char *cmd);
 int			execute_builtin(t_cmd_group *cmd);
 
 // exec_cmd.c
-int			execute_command(t_cmd_group *cmd_lines, char **env);
+int			execute_command(t_cmd_group *cmd_lines, char ***env_ptr);
 
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
 char		*ft_get_cmd_path(char *cmd, char **env);
 
 // parser_cmd.c
-t_cmd_group	*init_cmd_group(char *line, char **env, int *exit_status);
+t_cmd_group	*init_cmd_group(char *line, char ***env_ptr, int *exit_status);
 
 // parser_get_info.c
 int			next_after_redirect(char **tab, int index);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/02 17:55:05 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:35:23 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_cmd_group
 	char				**out_filenames;
 	char				*cmd;
 	char				**argv;
-	char				**env;
+	char				***env_ptr;
 	t_operator			operator;
 	int					in_fd;
 	int					out_fd;
@@ -62,7 +62,7 @@ typedef struct s_cmd_group
 	struct s_cmd_group	*prev;
 }	t_cmd_group;
 
-t_cmd_group	*simple_new_cmd(char **argv, char **env);
+t_cmd_group	*simple_new_cmd(char **argv, char ***env_ptr);
 int			cmd_len(t_cmd_group *cmd_lines);
 int			exec_cmd(t_cmd_group *cmd_lines);
 void		close_fd(int fd);
