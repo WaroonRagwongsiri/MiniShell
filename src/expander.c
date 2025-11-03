@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 08:33:10 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 16:15:43 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:24:30 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static char	*expand_token(char *token, char ***env_ptr, int *exit_status)
 	{
 		key = ft_strdup(&token[i + 1]);
 		key = ft_strtrim(key, "\'\" ");
+		if (ft_strlen(key) == 0)
+			return (NULL);
 		if (key[0] == '?')
 			value = ft_strjoin(ft_itoa(*exit_status), ft_strdup(&token[i + 2]));
 		else
