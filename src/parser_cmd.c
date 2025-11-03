@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 19:52:54 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 22:12:53 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	init_cmd_node(t_cmd_group *node, char *segment,
 	node->cmd_tokens = tab_skip_empty(node->cmd_tokens);
 	node->in_filenames = get_in_filenames(node->cmd_tokens);
 	node->out_filenames = get_out_filenames(node->cmd_tokens);
-	node->cmd = get_cmd(node->cmd_tokens);
 	node->argv = get_argv(node->cmd_tokens);
+	node->cmd = ft_strdup(node->argv[0]);
 	node->env_ptr = env_ptr;
 	node->is_heredoc = false;
 	node->lim = NULL;
