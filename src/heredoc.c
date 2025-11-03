@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 22:37:01 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/02 22:08:53 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/03 10:27:46 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int	heredoc(t_cmd_group *cur)
 		waitpid(pid, &exit_status, 0);
 		if (exit_status != 0)
 			return (-1);
-		}
-		return (0);
 	}
+	return (0);
+}
 
 void	loop_heredoc(t_cmd_group *cmd_lines)
 {

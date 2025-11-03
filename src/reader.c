@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/01 20:12:42 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/03 08:56:41 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ char	*reader(char **env)
 	if (prompt == NULL)
 		return (NULL);
 	line = readline(prompt);
+	if (line == NULL)
+		return (NULL);
+	if (!is_completed_quotes(&line) && line == NULL)
+	{
+		line = ft_strdup("");
+		if (line == NULL)
+			return (NULL);
+	}
 	if (line != NULL && ft_strlen(line) > 0)
 		add_history(line);
 	return (line);
