@@ -112,6 +112,7 @@ int			set_env_var(char ***env, char *arg);
 // builtin_utils2.c
 bool		is_valid_echo_flag(char *arg);
 char		*get_env_value(char **env, const char *key);
+void		inner_unset(char *cur, char ***env_ptr);
 
 // exec_buildin.c
 int			is_builtin(char *cmd);

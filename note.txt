@@ -1,17 +1,19 @@
 1	cat | -> parse error $? = 2
-2	$SHVL
-3	cd update -> update $OLDPWD
+2	$SHVL ✅
+3	cd update -> update $OLDPWD ✅
 4	exit status of terminate ✅
-5	echo -nnnnwadwapda
+5	echo -nnnnwadwapda ✅
 6	export 
 7	max pipe ✅
-8	unset หลายตัว
+8	unset หลายตัว ✅
 9	"''"
 10	                empty token
 11	waragwon@z2t9c1:~$ echo "'$USER'" -> 'waragwon'
 
 Done
-3. cd update -> update $OLDPWD ✅
+2	$SHVL ✅
+3	cd update -> update $OLDPWD ✅
 4	exit status of terminate ✅
-5. echo -nnnnwadwapda ✅
+5	echo -nnnnwadwapda ✅
 7	max pipe ✅
+8	unset หลายตัว ✅

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:15:49 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 13:12:13 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 20:04:39 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,13 @@ int	builtin_export(t_cmd_group *cmd, char ***env_ptr)
 
 int	builtin_unset(t_cmd_group *cmd, char ***env_ptr)
 {
-	int	i;
-	int	env_len;
-	int	arg_len;
+	int		i;
 
-	if (cmd->argv[1] == NULL)
-		return (0);
-	env_len = tab_len(*env_ptr);
-	i = -1;
-	arg_len = ft_strlen(cmd->argv[1]);
-	while (++i < env_len)
+	i = 1;
+	while (cmd->argv[i])
 	{
-		if ((ft_strncmp((*env_ptr)[i], cmd->argv[1], arg_len) == 0
-			&& (int)ft_strlen((*env_ptr)[i]) >= arg_len
-			&& (*env_ptr)[i][arg_len] == '='))
-		{
-			if (i == env_len - 1)
-				(*env_ptr)[i] = NULL;
-			else
-				ft_memmove(&(*env_ptr)[i], &(*env_ptr)[i + 1],
-					(env_len - i) * sizeof(char *));
-			break ;
-		}
+		inner_unset(cmd->argv[i], env_ptr);
+		i++;
 	}
 	close_builtin_fds(cmd);
 	return (0);

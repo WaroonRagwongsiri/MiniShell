@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 07:56:23 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 17:47:30 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 20:04:42 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,29 @@ char	*get_env_value(char **env, const char *key)
 		i++;
 	}
 	return (NULL);
+}
+
+void	inner_unset(char *cur, char ***env_ptr)
+{
+	int		i;
+	int		env_len;
+	int		arg_len;
+
+	i = -1;
+	arg_len = ft_strlen(cur);
+	env_len = tab_len(*env_ptr);
+	while (++i < env_len)
+	{
+		if ((ft_strncmp((*env_ptr)[i], cur, arg_len) == 0
+			&& (int)ft_strlen((*env_ptr)[i]) >= arg_len
+			&& (*env_ptr)[i][arg_len] == '='))
+		{
+			if (i == env_len - 1)
+				(*env_ptr)[i] = NULL;
+			else
+				ft_memmove(&(*env_ptr)[i], &(*env_ptr)[i + 1],
+					(env_len - i) * sizeof(char *));
+			break ;
+		}
+	}
 }
