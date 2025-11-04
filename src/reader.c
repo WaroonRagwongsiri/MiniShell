@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 15:57:55 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:22:33 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	prompt_cat(char *prompt, char *user, char *path, char *home)
 	len = ft_strlcat(prompt, "@", len + 2);
 	len = ft_strlcat(prompt, HOSTNAME, len + ft_strlen(HOSTNAME) + 1);
 	len = ft_strlcat(prompt, ":", len + 2);
-	if (home != NULL && is_home_path(home, path))
+	if (home != NULL && is_home_path(home, path) && ft_strlen(home) != 0)
 	{
 		len = ft_strlcat(prompt, "~", len + 2);
 		path += ft_strlen(home);
