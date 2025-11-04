@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 22:12:53 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 10:36:36 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static void	init_cmd_node(t_cmd_group *node, char *segment,
 	node->in_filenames = get_in_filenames(node->cmd_tokens);
 	node->out_filenames = get_out_filenames(node->cmd_tokens);
 	node->argv = get_argv(node->cmd_tokens);
-	node->cmd = ft_strdup(node->argv[0]);
+	if (node->argv != NULL)
+		node->cmd = ft_strdup(node->argv[0]);
+	else
+		node->cmd = NULL;
 	node->env_ptr = env_ptr;
 	node->is_heredoc = false;
 	node->lim = NULL;
@@ -93,6 +96,8 @@ t_cmd_group	*init_cmd_group(char *line, char ***env_ptr, int *exit_status)
 	int			size;
 	char		**tokens;
 
+	if (line == NULL || ft_strlen(line)  == 0)
+		return (NULL);
 	tokens = tokenizer(line);
 	tab = split_tokens(tokens);
 	size = tab_len(tab);
