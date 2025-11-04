@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 07:56:23 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 20:11:40 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 20:48:55 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	inner_unset(char *cur, char ***env_ptr)
 	while (++i < env_len)
 	{
 		if ((ft_strncmp((*env_ptr)[i], cur, arg_len) == 0
-			&& (int)ft_strlen((*env_ptr)[i]) >= arg_len
-			&& (*env_ptr)[i][arg_len] == '='))
+			&& (int)ft_strlen((*env_ptr)[i]) >= arg_len))
 		{
 			if (i == env_len - 1)
 				(*env_ptr)[i] = NULL;
