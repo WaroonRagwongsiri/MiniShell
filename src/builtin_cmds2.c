@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:15:49 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 20:04:39 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/04 20:12:59 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	builtin_env(t_cmd_group *cmd)
 	env = *(cmd->env_ptr);
 	while (env[i] != NULL)
 	{
-		ft_putendl_fd(env[i], STDOUT_FILENO);
+		if (ft_strchr(env[i], '=') != NULL)
+			ft_putendl_fd(env[i], STDOUT_FILENO);
 		i++;
 	}
 	close_builtin_fds(cmd);
