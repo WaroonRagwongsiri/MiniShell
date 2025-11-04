@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 16:45:28 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:32:19 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exec_cmd(t_cmd_group *cmd_lines, int process_num)
 	t_cmd_group	*cur;
 
 	if (open_pipes(pipes, process_num) == -1)
-		return(close_pipes(pipes, process_num), ft_putendl_fd(P_ERR, 2), 141);
+		return (close_pipes(pipes, process_num), ft_putendl_fd(P_ERR, 2), 141);
 	i = -1;
 	cur = cmd_lines;
 	while (++i < process_num && cur)

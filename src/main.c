@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 20:00:23 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:32:06 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,31 @@ static void	exit_after_reader(void)
 	exit(EXIT_SUCCESS);
 }
 
+static int	update_shlvl(char **mini_env)
+{
+	char	*shlvl_str;
+	int		shlvl_value;
+	char	*new_shlvl;
+	char	*env_var;
+	int		result;
+
+	shlvl_str = get_env_value(mini_env, "SHLVL");
+	if (shlvl_str == NULL)
+		shlvl_value = 0;
+	else
+		shlvl_value = ft_atoi(shlvl_str) + 1;
+	if (shlvl_value < 0)
+		shlvl_value = 0;
+	new_shlvl = ft_itoa(shlvl_value);
+	if (!new_shlvl)
+		return (-1);
+	env_var = ft_strjoin("SHLVL=", new_shlvl);
+	if (!env_var)
+		return (-1);
+	result = set_env_var(&mini_env, env_var);
+	return (result);
+}
+
 static char	**init_environment(char **env)
 {
 	char	**mini_env;
@@ -28,6 +53,8 @@ static char	**init_environment(char **env)
 	mini_env = copy_tab(env);
 	if (mini_env == NULL)
 		exit(EXIT_FAILURE);
+	if (update_shlvl(mini_env) != 0)
+		exit_errno(EXIT_FAILURE);
 	return (mini_env);
 }
 
