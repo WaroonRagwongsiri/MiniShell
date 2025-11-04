@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:53 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 10:36:36 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:23:56 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_cmd_group	*init_cmd_group(char *line, char ***env_ptr, int *exit_status)
 	int			size;
 	char		**tokens;
 
-	if (line == NULL || ft_strlen(line)  == 0)
+	if (line == NULL || ft_strlen(line) == 0)
 		return (NULL);
 	tokens = tokenizer(line);
 	tab = split_tokens(tokens);
