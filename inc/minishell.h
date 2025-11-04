@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 13:15:15 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:25:21 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int			find_env_index(char **env, char *arg);
 void		print_env(char **env, int fd);
 int			append_env(char ***env, char *arg);
 int			set_env_var(char ***env, char *arg);
+char		*get_env_value(char **env, const char *key);
 
 // exec_buildin.c
 int			is_builtin(char *cmd);
