@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 07:56:23 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 20:04:42 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/04 20:11:40 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,56 @@ void	inner_unset(char *cur, char ***env_ptr)
 			break ;
 		}
 	}
+}
+
+void	sort_env(char **env)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	while (env != NULL && env[i] != NULL)
+	{
+		j = i + 1;
+		while (env[j] != NULL)
+		{
+			if (ft_strncmp(env[i], env[j], ft_strlen(env[i])) > 0)
+			{
+				tmp = env[i];
+				env[i] = env[j];
+				env[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	print_formatted_env(char *entry, int fd)
+{
+	int	i;
+
+	ft_putstr_fd("declare -x ", fd);
+	i = 0;
+	while (entry[i] != '\0' && entry[i] != '=')
+	{
+		ft_putchar_fd(entry[i], fd);
+		i++;
+	}
+	if (entry[i] == '\0')
+	{
+		ft_putchar_fd('\n', fd);
+		return ;
+	}
+	ft_putstr_fd("=\"", fd);
+	i++;
+	while (entry[i] != '\0')
+	{
+		if (entry[i] == '\"' || entry[i] == '\\')
+			ft_putchar_fd('\\', fd);
+		ft_putchar_fd(entry[i], fd);
+		i++;
+	}
+	ft_putstr_fd("\"\n", fd);
 }

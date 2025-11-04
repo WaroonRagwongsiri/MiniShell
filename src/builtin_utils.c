@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 07:56:23 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/02 09:16:52 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 20:12:00 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,18 @@ int	find_env_index(char **env, char *arg)
 
 void	print_env(char **env, int fd)
 {
-	int	idx;
+	int		i;
+	char	**sorted;
 
-	idx = 0;
-	while (env != NULL && env[idx] != NULL)
+	sorted = copy_tab(env);
+	if (sorted == NULL)
+		return ;
+	sort_env(sorted);
+	i = 0;
+	while (sorted[i] != NULL)
 	{
-		ft_putendl_fd(env[idx], fd);
-		idx++;
+		print_formatted_env(sorted[i], fd);
+		i++;
 	}
 }
 
