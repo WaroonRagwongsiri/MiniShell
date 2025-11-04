@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 12:31:25 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 12:34:18 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:26:25 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,11 @@ int	inner_wait_process(int pid[MAX_PROCESS], int process_num,
 
 void	print_sig_exit(int status)
 {
-	if (WTERMSIG(status) == SIGINT)
-		ft_putendl_fd("", 2);
-	else if (WTERMSIG(status) == SIGQUIT)
-		ft_putendl_fd("Quit (core dumped)", 2);
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGINT)
+			ft_putendl_fd("", 2);
+		else if (WTERMSIG(status) == SIGQUIT)
+			ft_putendl_fd("Quit (core dumped)", 2);
+	}
 }

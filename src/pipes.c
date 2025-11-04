@@ -6,25 +6,21 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 12:31:36 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:45:55 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_cmd(t_cmd_group *cmd_lines)
+int	exec_cmd(t_cmd_group *cmd_lines, int process_num)
 {
 	int			pid[MAX_PROCESS];
 	int			pipes[MAX_PIPE][2];
 	int			i;
-	int			process_num;
 	t_cmd_group	*cur;
 
-	process_num = cmd_len(cmd_lines);
-	if (cmd_lines == NULL || process_num == 0)
-		return (0);
 	if (open_pipes(pipes, process_num) == -1)
-		exit_msg(PIPE_ERR);
+		return (close_pipes(pipes, process_num), ft_putendl_fd(P_ERR, 2), 141);
 	i = -1;
 	cur = cmd_lines;
 	while (++i < process_num && cur)

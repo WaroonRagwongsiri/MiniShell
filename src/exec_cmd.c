@@ -6,11 +6,28 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 13:15:35 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:47:46 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static int	exec_cmd_wraper(t_cmd_group *cmd_lines, int process_num)
+{
+	if (cmd_lines == 0 || process_num == 0)
+		return (0);
+	if (process_num > MAX_PROCESS)
+	{
+		ft_putendl_fd("minishell: too many process", 2);
+		return (1);
+	}
+	if (process_num - 1 > MAX_PIPE)
+	{
+		ft_putendl_fd("minishell: too many pipes", 2);
+		return (1);
+	}
+	return (exec_cmd(cmd_lines, process_num));
+}
 
 int	execute_command(t_cmd_group *cmd_lines, char ***env_ptr)
 {
@@ -36,6 +53,6 @@ int	execute_command(t_cmd_group *cmd_lines, char ***env_ptr)
 		exit_status = loop_open(cmd_lines);
 		if (exit_status != 0)
 			return (exit_status);
-		return (exec_cmd(cmd_lines));
+		return (exec_cmd_wraper(cmd_lines, process_num));
 	}
 }

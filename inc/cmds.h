@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 12:33:27 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:46:41 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define MAX_PIPE 49
 
 // Error Msg
-# define PIPE_ERR "Pipe Open Error"
+# define P_ERR " Broken pipe"
 
 typedef enum s_operator
 {
@@ -65,7 +65,7 @@ typedef struct s_cmd_group
 
 t_cmd_group	*simple_new_cmd(char **argv, char ***env_ptr);
 int			cmd_len(t_cmd_group *cmd_lines);
-int			exec_cmd(t_cmd_group *cmd_lines);
+int			exec_cmd(t_cmd_group *cmd_lines, int process_num);
 void		close_fd(int fd);
 int			open_pipes(int pipes[MAX_PIPE][2], int process_num);
 void		close_pipes(int pipes[MAX_PIPE][2], int process_num);
