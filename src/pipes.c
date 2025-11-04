@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/03 14:22:15 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:31:36 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,52 +63,6 @@ void	dup_process(int index, int pipes[MAX_PIPE][2],
 		if (dup2(pipes[index][1], STDOUT_FILENO) == -1)
 			exit_msg("Dup2 Pipe Output");
 	}
-}
-
-int	wait_pid_process(int pid[MAX_PROCESS], int process_num,
-	t_cmd_group *cmd_lines)
-{
-	int			status[MAX_PROCESS];
-	int			closed[MAX_PROCESS];
-	int			closed_process;
-	t_cmd_group	*cur;
-	int			i;
-
-	signal_handler(MAIN_CHILD);
-	ft_bzero(closed, sizeof(closed));
-	closed_process = 0;
-	while (closed_process < process_num)
-	{
-		i = -1;
-		cur = cmd_lines;
-		while (++i < process_num)
-		{
-			if (closed[i])
-				continue ;
-			if (waitpid(pid[i], &status[i], WNOHANG) > 0)
-			{
-				closed[i] = 1;
-				closed_process++;
-				cur->exit_status = status[i];
-			}
-			cur = cur->next;
-		}
-	}
-	signal_handler(MAIN);
-	print_sig_exit(status[process_num - 1]);
-	if (WIFEXITED(status[process_num - 1]))
-		return (WEXITSTATUS(status[process_num - 1]));
-	else if (WIFSIGNALED(status[process_num - 1]))
-		return (128 + WTERMSIG(status[process_num - 1]));
-	return (0);
-}
-
-void	print_sig_exit(int status)
-{
-	if (WTERMSIG(status) == SIGINT)
-		ft_putendl_fd("", 2);
-	else if (WTERMSIG(status) == SIGQUIT)
-		ft_putendl_fd("Quit (core dumped)", 2);
 }
 
 void	exec(int index, int pipes[MAX_PIPE][2],

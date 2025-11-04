@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 12:23:25 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:33:27 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void		close_all(int pipes[MAX_PIPE][2], int process_num,
 				t_cmd_group *cmd_lines);
 void		exec(int index, int pipes[MAX_PIPE][2],
 				t_cmd_group *cmd_lines, int process_num);
+int			inner_wait_process(int pid[MAX_PROCESS], int process_num,
+				t_cmd_group *cmd_lines, int closed_process);
 
 // Heredocs
 int			heredoc(t_cmd_group *cur);
