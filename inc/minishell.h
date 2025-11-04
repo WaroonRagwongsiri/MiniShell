@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 17:13:59 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:39:48 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int			set_env_var(char ***env, char *arg);
 
 // builtin_utils2.c
 bool		is_valid_echo_flag(char *arg);
+char		*get_env_value(char **env, const char *key);
 
 // exec_buildin.c
 int			is_builtin(char *cmd);
