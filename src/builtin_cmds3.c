@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 13:15:54 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:16:26 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ int	builtin_echo_main(t_cmd_group *cmd)
 	newline = true;
 	if (cmd->argv[1] != NULL && ft_strncmp(cmd->argv[1], "-n", 2) == 0)
 	{
-		newline = false;
-		i = 2;
+		if (is_valid_echo_flag(cmd->argv[1] + 2))
+		{
+			newline = false;
+			i = 2;
+		}
 	}
 	while (cmd->argv[i] != NULL)
 	{
@@ -53,14 +56,18 @@ int	builtin_pwd_main(t_cmd_group *cmd)
 	return (1);
 }
 
-static void	update_pwd(char ***env_ptr)
+static int	update_pwd(char ***env_ptr, int update_old_pwd)
 {
 	char	cwd[PATH_MAX];
 	char	*new_pwd;
 
-	new_pwd = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
+	if (update_old_pwd)
+		new_pwd = ft_strjoin("OLDPWD=", getcwd(cwd, sizeof(cwd)));
+	else
+		new_pwd = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
 	if (new_pwd != NULL)
 		set_env_var(env_ptr, new_pwd);
+	return (1);
 }
 
 int	builtin_cd_main(t_cmd_group *cmd)
@@ -81,13 +88,13 @@ int	builtin_cd_main(t_cmd_group *cmd)
 	}
 	else
 		path = cmd->argv[1];
-	if (chdir(path) != 0)
+	if (update_pwd(cmd->env_ptr, 1) && chdir(path) != 0)
 	{
 		perror("cd");
 		close_builtin_fds(cmd);
 		return (1);
 	}
-	update_pwd(cmd->env_ptr);
+	update_pwd(cmd->env_ptr, 0);
 	close_builtin_fds(cmd);
 	return (0);
 }

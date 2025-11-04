@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 13:22:33 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:04:14 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	prompt_cat(char *prompt, char *user, char *path, char *home)
 		path += ft_strlen(home);
 	}
 	len = ft_strlcat(prompt, path, len + ft_strlen(path) + 1);
-	ft_strlcat(prompt, " $ ", len + 4);
+	ft_strlcat(prompt, "$ ", len + 3);
 }
 
 char	*get_prompt(char ***env_ptr)
