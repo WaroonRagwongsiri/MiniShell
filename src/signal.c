@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 14:17:50 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/03 14:02:48 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:37:46 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,8 @@ void	child_quit(int signum)
 	g_status = SIGQUIT;
 }
 
-void	heredoc_interrupt(int signum)
+static void	use_handler(t_sig_mode mode)
 {
-	(void)signum;
-	g_status = SIGINT;
-	rl_replace_line("", 0);
-	rl_crlf();
-	rl_redisplay();
-	exit_errno(130);
-}
-
-void	main_heredoc_interrupt(int signum)
-{
-	(void)signum;
-	g_status = SIGINT;
-}
-
-void	signal_handler(t_sig_mode mode)
-{
-	g_status = 0;
 	if (mode == MAIN)
 	{
 		signal(SIGINT, main_interrupt);
@@ -81,4 +64,10 @@ void	signal_handler(t_sig_mode mode)
 		signal(SIGINT, main_heredoc_interrupt);
 		signal(SIGQUIT, SIG_IGN);
 	}
+}
+
+void	signal_handler(t_sig_mode mode)
+{
+	g_status = 0;
+	use_handler(mode);
 }

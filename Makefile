@@ -6,7 +6,7 @@
 #    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/03 13:28:26 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/11/04 12:47:55 by waragwon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,10 +66,13 @@ SRC_FILES = main.c \
 			parser_out_files.c \
 			heredoc.c \
 			iofiles.c \
+			iofiles2.c \
 			iofiles_utils.c \
 			expander.c \
 			signal.c \
-			utils_cmd_path.c
+			signal2.c \
+			utils_cmd_path.c \
+			waiter.c \
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

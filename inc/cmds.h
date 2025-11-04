@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/03 12:35:23 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:33:27 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,15 @@ void		close_pipes(int pipes[MAX_PIPE][2], int process_num);
 void		close_all_fd(t_cmd_group *cmd_lines);
 void		dup_process(int index, int pipes[MAX_PIPE][2],
 				t_cmd_group *cur, int process_num);
-			int	wait_pid_process(int pid[MAX_PROCESS], int process_num,
+int			wait_pid_process(int pid[MAX_PROCESS], int process_num,
 				t_cmd_group *cmd_lines);
 void		print_sig_exit(int status);
 void		close_all(int pipes[MAX_PIPE][2], int process_num,
 				t_cmd_group *cmd_lines);
 void		exec(int index, int pipes[MAX_PIPE][2],
 				t_cmd_group *cmd_lines, int process_num);
+int			inner_wait_process(int pid[MAX_PROCESS], int process_num,
+				t_cmd_group *cmd_lines, int closed_process);
 
 // Heredocs
 int			heredoc(t_cmd_group *cur);

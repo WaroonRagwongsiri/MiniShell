@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 19:53:18 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:22:42 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,6 @@ void		main_interrupt(int signum);
 void		child_interrupt(int signum);
 void		child_quit(int signum);
 void		heredoc_interrupt(int signum);
+void		main_heredoc_interrupt(int signum);
 
 #endif
