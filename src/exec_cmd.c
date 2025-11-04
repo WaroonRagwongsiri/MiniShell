@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 19:59:58 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:15:35 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	execute_command(t_cmd_group *cmd_lines, char ***env_ptr)
 		exit_status = loop_open(cmd_lines);
 		if (exit_status != 0)
 			return (exit_status);
-		return (execute_builtin(cmd_lines));
+		return (execute_builtin_main(cmd_lines));
 	}
 	else
 	{

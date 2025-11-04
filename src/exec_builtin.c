@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:25:22 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 12:32:41 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:15:03 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,26 @@ int	execute_builtin(t_cmd_group *cmd)
 		return (builtin_export(cmd, cmd->env_ptr));
 	if (ft_strncmp(cmd->argv[0], "unset", 6) == 0)
 		return (builtin_unset(cmd, cmd->env_ptr));
+	return (1);
+}
+
+int	execute_builtin_main(t_cmd_group *cmd)
+{
+	if (cmd == NULL || cmd->argv == NULL || cmd->argv[0] == NULL)
+		return (1);
+	if (ft_strncmp(cmd->argv[0], "echo", 5) == 0)
+		return (builtin_echo_main(cmd));
+	if (ft_strncmp(cmd->argv[0], "cd", 3) == 0)
+		return (builtin_cd_main(cmd));
+	if (ft_strncmp(cmd->argv[0], "pwd", 4) == 0)
+		return (builtin_pwd_main(cmd));
+	if (ft_strncmp(cmd->argv[0], "exit", 5) == 0)
+		return (builtin_exit_main(cmd));
+	if (ft_strncmp(cmd->argv[0], "env", 4) == 0)
+		return (builtin_env_main(cmd));
+	if (ft_strncmp(cmd->argv[0], "export", 7) == 0)
+		return (builtin_export_main(cmd, cmd->env_ptr));
+	if (ft_strncmp(cmd->argv[0], "unset", 6) == 0)
+		return (builtin_unset_main(cmd, cmd->env_ptr));
 	return (1);
 }

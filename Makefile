@@ -6,7 +6,7 @@
 #    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/04 12:47:55 by waragwon         ###   ########.fr        #
+#    Updated: 2025/11/04 13:15:29 by waragwon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,8 @@ SRC_FILES = main.c \
 			signal2.c \
 			utils_cmd_path.c \
 			waiter.c \
+			builtin_cmds3.c \
+			builtin_cmds4.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

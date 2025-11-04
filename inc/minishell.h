@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 12:22:42 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:15:15 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,17 @@ void		close_builtin_fds(t_cmd_group *cmd);
 int			builtin_export(t_cmd_group *cmd, char ***env_ptr);
 int			builtin_unset(t_cmd_group *cmd, char ***env_ptr);
 
+// builtin_cmd3.c
+int			builtin_echo_main(t_cmd_group *cmd);
+int			builtin_pwd_main(t_cmd_group *cmd);
+int			builtin_cd_main(t_cmd_group *cmd);
+int			builtin_exit_main(t_cmd_group *cmd);
+int			builtin_env_main(t_cmd_group *cmd);
+
+// builtin_cmd4.c
+int			builtin_export_main(t_cmd_group *cmd, char ***env_ptr);
+int			builtin_unset_main(t_cmd_group *cmd, char ***env_ptr);
+
 // builtin_utils.c
 bool		is_valid_identifier(char *arg);
 int			find_env_index(char **env, char *arg);
@@ -101,6 +112,7 @@ int			set_env_var(char ***env, char *arg);
 // exec_buildin.c
 int			is_builtin(char *cmd);
 int			execute_builtin(t_cmd_group *cmd);
+int			execute_builtin_main(t_cmd_group *cmd);
 
 // exec_cmd.c
 int			execute_command(t_cmd_group *cmd_lines, char ***env_ptr);
