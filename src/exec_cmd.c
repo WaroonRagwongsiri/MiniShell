@@ -6,13 +6,13 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 17:31:38 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:35:58 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	exec_cmd_wraper(t_cmd_group *cmd_lines, int process_num)
+static int exec_cmd_wraper(t_cmd_group *cmd_lines, int process_num)
 {
 	if (cmd_lines == 0 || process_num == 0)
 		return (0);
