@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 12:33:27 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:35:27 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define MAX_PIPE 49
 
 // Error Msg
-# define PIPE_ERR "Pipe Open Error"
+# define P_ERR " Broken pipe"
 
 typedef enum s_operator
 {
