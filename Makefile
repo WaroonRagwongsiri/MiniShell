@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
+#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/04 17:46:23 by waragwon         ###   ########.fr        #
+#    Updated: 2025/11/04 20:35:57 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,8 @@ SRC_FILES = main.c \
 			waiter.c \
 			builtin_cmds3.c \
 			builtin_cmds4.c \
-			builtin_utils2.c
+			builtin_utils2.c \
+			builtin_export_utils.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

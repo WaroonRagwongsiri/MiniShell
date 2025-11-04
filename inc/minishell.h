@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 20:11:17 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/04 20:35:44 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,13 @@ char		*get_env_value(char **env, const char *key);
 void		inner_unset(char *cur, char ***env_ptr);
 void		sort_env(char **env);
 void		print_formatted_env(char *entry, int fd);
+
+// builtin_export_utils.c
+int			export_error(char *arg);
+int			export_assign(char *arg, char ***env_ptr);
+int			export_without_value(char *arg, char ***env_ptr);
+int			handle_export_arg(char *arg, char ***env_ptr);
+int			export_print_only(t_cmd_group *cmd, char ***env_ptr, int fd);
 
 // exec_buildin.c
 int			is_builtin(char *cmd);

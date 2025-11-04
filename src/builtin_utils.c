@@ -40,7 +40,7 @@ int	find_env_index(char **env, char *arg)
 	while (env != NULL && env[idx] != NULL)
 	{
 		if (ft_strncmp(env[idx], arg, key_len) == 0
-			&& env[idx][key_len] == '=')
+			&& (env[idx][key_len] == '=' || env[idx][key_len] == '\0'))
 			return (idx);
 		idx++;
 	}
