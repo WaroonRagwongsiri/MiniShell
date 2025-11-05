@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 11:21:20 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:10:46 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ static char	*check_completed_pipe(char *str)
 	if (str == NULL)
 		return (NULL);
 	tokens = tokenizer(str);
-	if (tab_len(tokens) < 1)
-		return (str);
+	if ((tab_len(tokens) < 1) || (tokens[0][0] == '|'))
+		return (ft_strdup(str));
 	last_token = tokens[tab_len(tokens) - 1];
 	joined = ft_strdup(str);
 	while (ft_strncmp(last_token, "|", 2) == 0)

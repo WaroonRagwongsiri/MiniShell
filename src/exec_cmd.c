@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 17:47:46 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:17:25 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#define IN_ERROR "minishell: syntax error near unexpected token `<'\n"
+#define OUT_ERROR "minishell: syntax error near unexpected token `>'\n"
 
 static int	exec_cmd_wraper(t_cmd_group *cmd_lines, int process_num)
 {
@@ -29,13 +31,51 @@ static int	exec_cmd_wraper(t_cmd_group *cmd_lines, int process_num)
 	return (exec_cmd(cmd_lines, process_num));
 }
 
-int	execute_command(t_cmd_group *cmd_lines, char ***env_ptr)
+static bool	check_redirection_tokens(char **tokens, char c)
+{
+	int	i;
+
+	if (tokens != NULL)
+	{
+		i = 0;
+		while (tokens[i] != NULL)
+		{
+			if (tokens[i][0] == c)
+			{
+				if (c == '<')
+					ft_putstr_fd(IN_ERROR, STDERR_FILENO);
+				else if (c == '>')
+					ft_putstr_fd(OUT_ERROR, STDERR_FILENO);
+				return (false);
+			}
+			i++;
+		}
+	}
+	return (true);
+}
+
+static bool	check_parser_filename(t_cmd_group *cmd_lines)
+{
+	int	process_num;
+
+	process_num = cmd_len(cmd_lines);
+	if (cmd_lines == NULL || process_num == 0)
+		return (true);
+	if (!check_redirection_tokens(cmd_lines->in_filenames, '<'))
+		return (false);
+	if (!check_redirection_tokens(cmd_lines->out_filenames, '>'))
+		return (false);
+	return (true);
+}
+
+int	execute_command(t_cmd_group *cmd_lines)
 {
 	int			process_num;
 	int			exit_status;
 
-	(void)env_ptr;
 	process_num = cmd_len(cmd_lines);
+	if (!check_parser_filename(cmd_lines))
+		return (2);
 	if (cmd_lines == NULL || process_num == 0 || cmd_lines->cmd == NULL)
 		return (0);
 	if (process_num == 1
