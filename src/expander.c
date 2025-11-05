@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 08:33:10 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/03 18:49:08 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 14:06:00 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static char	*expand_token(char *token, char ***env_ptr, int *exit_status)
 
 	if (token[0] == '\'')
 		return (NULL);
-	remove_quotes(token);
 	expanded = ft_strdup("");
 	i = 0;
 	while (token[i] != '\0')
