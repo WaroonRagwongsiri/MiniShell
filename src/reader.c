@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 17:04:14 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 11:03:02 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,34 @@ char	*get_prompt(char ***env_ptr)
 	return (prompt);
 }
 
+static char	*check_completed_pipe(char *str)
+{
+	char	*line;
+	char	*temp_line;
+	char	**tokens;
+	char	*last_token;
+	char	*joined;
+
+	if (str == NULL)
+		return (NULL);
+	tokens = tokenizer(str);
+	if (tab_len(tokens) < 1)
+		return (NULL);
+	last_token = tokens[tab_len(tokens) - 1];
+	joined = ft_strdup(str);
+	while (ft_strncmp(last_token, "|", 2) == 0)
+	{
+		line = readline("> ");
+		temp_line = ft_strdup(line);
+		free(line);
+		joined = ft_strjoin(joined, " ");
+		joined = ft_strjoin(joined, temp_line);
+		tokens = tokenizer(joined);
+		last_token = tokens[tab_len(tokens) - 1];
+	}
+	return (joined);
+}
+
 char	*reader(char ***env_ptr)
 {
 	char	*prompt;
@@ -88,6 +116,7 @@ char	*reader(char ***env_ptr)
 		if (tmp_line == NULL)
 			return (NULL);
 	}
+	tmp_line = check_completed_pipe(tmp_line);
 	if (tmp_line != NULL && ft_strlen(tmp_line) > 0)
 		add_history(tmp_line);
 	return (tmp_line);

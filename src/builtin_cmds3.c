@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 17:16:26 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 11:02:09 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	builtin_exit_main(t_cmd_group *cmd)
 	if (cmd->argv[0] == NULL || cmd->argv[1] == NULL)
 		exit(0);
 	if (cmd->argv[1] != NULL)
-		exit_code = ft_atoi(cmd->argv[1]);
+		exit_code = ft_atoi(cmd->argv[1]) % 256;
 	i = -1;
 	while (cmd->argv[1][++i] != '\0' && tab_len(cmd->argv) == 2)
 	{
