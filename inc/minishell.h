@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 11:19:51 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:30:05 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int			execute_builtin(t_cmd_group *cmd);
 int			execute_builtin_main(t_cmd_group *cmd);
 
 // exec_cmd.c
-int			execute_command(t_cmd_group *cmd_lines, char ***env_ptr);
+int			execute_command(t_cmd_group *cmd_lines);
 
 // utils_env.c
 char		*ft_getenv(char **env, char *key);
@@ -152,6 +152,8 @@ char		**get_argv(char **tab);
 bool		is_heredoc_token(char *token);
 bool		is_append_token(char *token);
 bool		is_simple_redirect(char *token, char c);
+bool		is_pipe_token(char *token);
+bool		is_valid_tokens(char *line);
 
 // parser_outfiles.c
 void		set_out_files(t_cmd_group *node);
