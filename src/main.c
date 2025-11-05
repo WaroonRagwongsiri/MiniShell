@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 13:31:10 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 20:51:24 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,9 @@ static void	run_shell(char ***env_ptr)
 			exit_status = 2;
 			continue ;
 		}
+		if (g_status == SIGINT)
+			exit_status = 130;
 		cmd_lines = init_cmd_group(line, env_ptr, &exit_status);
-		if (DEBUG_MODE)
-		{
-			print_tokens(line);
-			print_cmd_group(cmd_lines);
-		}
 		exit_status = execute_command(cmd_lines);
 	}
 }
