@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 11:12:41 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 11:21:20 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ char	*reader(char ***env_ptr)
 		return (NULL);
 	tmp_line = ft_strdup(line);
 	free(line);
+	if (is_empty_cmds(tmp_line))
+		tmp_line = ft_strdup("");
 	if (!is_completed_quotes(&tmp_line) && tmp_line == NULL)
 	{
 		tmp_line = ft_strdup("");

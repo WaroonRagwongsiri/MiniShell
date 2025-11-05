@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/04 20:35:44 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 11:19:51 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ char		*reader(char ***env_ptr);
 
 // reader_quotes.c
 bool		is_completed_quotes(char **line);
+
+// reader_utils.c
+bool		is_empty_cmds(char	*str);
 
 // utils_check.c 
 bool		is_whitespace(char c);
