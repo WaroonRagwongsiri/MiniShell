@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 11:05:44 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 13:34:34 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 23:14:28 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,56 @@ bool	is_pipe_token(char *token)
 	return (token != NULL && ft_strncmp(token, "|", 2) == 0);
 }
 
+// bool	is_valid_tokens(char *line)
+// {
+// 	char	**tokens;
+
+// 	if (line == NULL)
+// 		return (false);
+// 	tokens = tokenizer(line);
+// 	if (tab_len(tokens) == 1)
+// 	{
+// 		if (is_heredoc_token(tokens[0]) || is_append_token(tokens[0]))
+// 		{
+// 			ft_putstr_fd(ERROR_MSG, STDERR_FILENO);
+// 			return (false);
+// 		}
+// 		if (is_simple_redirect(tokens[0], '<')
+// 			|| is_simple_redirect(tokens[0], '>'))
+// 		{
+// 			ft_putstr_fd(ERROR_MSG, STDERR_FILENO);
+// 			return (false);
+// 		}
+// 		if (is_pipe_token(tokens[0]))
+// 		{
+// 			ft_putstr_fd(PIPE_ERROR_MSG, STDERR_FILENO);
+// 			return (false);
+// 		}
+// 	}
+// 	return (true);
+// }
+
 bool	is_valid_tokens(char *line)
 {
 	char	**tokens;
+	int		i;
+	int		tok_len;
 
 	if (line == NULL)
 		return (false);
 	tokens = tokenizer(line);
-	if (tab_len(tokens) == 1)
+	i = -1;
+	tok_len = tab_len(tokens);
+	while (++i < tok_len)
 	{
-		if (is_heredoc_token(tokens[0]) || is_append_token(tokens[0]))
+		if (ft_strncmp(tokens[i], "|", 2) == 0)
 		{
-			ft_putstr_fd(ERROR_MSG, STDERR_FILENO);
-			return (false);
-		}
-		if (is_simple_redirect(tokens[0], '<')
-			|| is_simple_redirect(tokens[0], '>'))
-		{
-			ft_putstr_fd(ERROR_MSG, STDERR_FILENO);
-			return (false);
-		}
-		if (is_pipe_token(tokens[0]))
-		{
-			ft_putstr_fd(PIPE_ERROR_MSG, STDERR_FILENO);
-			return (false);
+			if (i == 0 || is_pipe_token(tokens[i - 1])
+			|| is_append_token(tokens[i - 1])
+			|| is_heredoc_token(tokens[i - 1])
+			|| is_simple_redirect(tokens[i - 1], '<')
+			|| is_simple_redirect(tokens[i - 1], '>'))
+				return (false);
 		}
 	}
 	return (true);

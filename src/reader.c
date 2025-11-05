@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 13:10:46 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/05 23:01:24 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,7 @@ char	*reader(char ***env_ptr)
 	if (is_empty_cmds(tmp_line))
 		tmp_line = ft_strdup("");
 	if (!is_completed_quotes(&tmp_line) && tmp_line == NULL)
-	{
 		tmp_line = ft_strdup("");
-		if (tmp_line == NULL)
-			return (NULL);
-	}
 	tmp_line = check_completed_pipe(tmp_line);
 	if (tmp_line != NULL && ft_strlen(tmp_line) > 0)
 		add_history(tmp_line);
