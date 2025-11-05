@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:18:07 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 17:46:41 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:26:34 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define MAX_PROCESS 50
 # define MAX_PIPE 49
+
+# include <stdbool.h>
 
 // Error Msg
 # define P_ERR " Broken pipe"

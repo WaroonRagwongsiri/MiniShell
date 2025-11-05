@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:44:02 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 17:45:55 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:26:01 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int	exec_cmd(t_cmd_group *cmd_lines, int process_num)
 		if (pid[i] == -1)
 			exit_msg("Fork Error");
 		if (pid[i] == 0)
+		{
+			if (!cur->cmd)
+				exit_errno(0);
 			exec(i, pipes, cmd_lines, process_num);
+		}
 		cur = cur->next;
 	}
 	close_all(pipes, process_num, cmd_lines);
