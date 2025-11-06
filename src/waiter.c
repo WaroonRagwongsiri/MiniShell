@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 12:31:25 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/04 16:26:25 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:32:38 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ void	print_sig_exit(int status)
 			ft_putendl_fd("", 2);
 		else if (WTERMSIG(status) == SIGQUIT)
 			ft_putendl_fd("Quit (core dumped)", 2);
+		else if (WTERMSIG(status) == SIGSEGV)
+			ft_putendl_fd("Segmentation fault (core dumped)", 2);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 13:10:46 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/06 12:26:08 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,16 @@ static char	*check_completed_pipe(char *str)
 	char	*last_token;
 	char	*joined;
 
-	if (str == NULL)
-		return (NULL);
 	tokens = tokenizer(str);
-	if ((tab_len(tokens) < 1) || (tokens[0][0] == '|'))
+	if ((tab_len(tokens) < 1) || !is_valid_tokens(str))
 		return (ft_strdup(str));
 	last_token = tokens[tab_len(tokens) - 1];
 	joined = ft_strdup(str);
-	while (ft_strncmp(last_token, "|", 2) == 0)
+	while (ft_strncmp(last_token, "|", 2) == 0 && is_valid_tokens(joined))
 	{
 		line = readline("> ");
+		if (!line)
+			return (NULL);
 		temp_line = ft_strdup(line);
 		free(line);
 		joined = ft_strjoin(joined, " ");
@@ -113,11 +113,7 @@ char	*reader(char ***env_ptr)
 	if (is_empty_cmds(tmp_line))
 		tmp_line = ft_strdup("");
 	if (!is_completed_quotes(&tmp_line) && tmp_line == NULL)
-	{
 		tmp_line = ft_strdup("");
-		if (tmp_line == NULL)
-			return (NULL);
-	}
 	tmp_line = check_completed_pipe(tmp_line);
 	if (tmp_line != NULL && ft_strlen(tmp_line) > 0)
 		add_history(tmp_line);
