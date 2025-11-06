@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
+#    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/05 11:20:03 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/11/06 20:48:17 by waroonwork@      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRC_FILES = main.c \
 			builtin_cmds3.c \
 			builtin_cmds4.c \
 			builtin_utils2.c \
+			builtin_utils3.c \
 			builtin_export_utils.c \
 			reader_utils.c
 

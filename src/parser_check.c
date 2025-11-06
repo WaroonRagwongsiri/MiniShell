@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 11:05:44 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 23:14:28 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/06 20:46:51 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ bool	is_valid_tokens(char *line)
 		if (ft_strncmp(tokens[i], "|", 2) == 0)
 		{
 			if (i == 0 || is_pipe_token(tokens[i - 1])
-			|| is_append_token(tokens[i - 1])
-			|| is_heredoc_token(tokens[i - 1])
-			|| is_simple_redirect(tokens[i - 1], '<')
-			|| is_simple_redirect(tokens[i - 1], '>'))
+				|| is_append_token(tokens[i - 1])
+				|| is_heredoc_token(tokens[i - 1])
+				|| is_simple_redirect(tokens[i - 1], '<')
+				|| is_simple_redirect(tokens[i - 1], '>'))
 				return (false);
 		}
 	}

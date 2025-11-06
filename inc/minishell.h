@@ -119,6 +119,9 @@ void		inner_unset(char *cur, char ***env_ptr);
 void		sort_env(char **env);
 void		print_formatted_env(char *entry, int fd);
 
+// builtin_utils3.c
+bool		is_valid_numeric(char *str);
+
 // builtin_export_utils.c
 int			export_error(char *arg);
 int			export_assign(char *arg, char ***env_ptr);

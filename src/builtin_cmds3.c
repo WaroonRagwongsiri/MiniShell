@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 11:02:09 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/06 20:47:40 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,29 +101,28 @@ int	builtin_cd_main(t_cmd_group *cmd)
 
 int	builtin_exit_main(t_cmd_group *cmd)
 {
-	int	exit_code;
-	int	i;
+	long	exit_code_long;
+	int		exit_code;
 
-	exit_code = 0;
-	if (cmd->argv[0] == NULL || cmd->argv[1] == NULL)
-		exit(0);
-	if (cmd->argv[1] != NULL)
-		exit_code = ft_atoi(cmd->argv[1]) % 256;
-	i = -1;
-	while (cmd->argv[1][++i] != '\0' && tab_len(cmd->argv) == 2)
+	ft_putendl_fd("exit", STDOUT_FILENO);
+	if (cmd->argv[1] == NULL)
+		exit(g_status);
+	if (!is_valid_numeric(cmd->argv[1]))
 	{
-		if (ft_isalpha(cmd->argv[1][i]))
-		{
-			ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
-			return (close_builtin_fds(cmd), 2);
-		}
+		ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
+		close_builtin_fds(cmd);
+		exit(2);
 	}
-	if (tab_len(cmd->argv) > 2)
+	if (cmd->argv[2] != NULL)
 	{
 		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
-		return (close_builtin_fds(cmd), 1);
+		close_builtin_fds(cmd);
+		return (1);
 	}
+	exit_code_long = ft_atol(cmd->argv[1]);
+	exit_code = exit_code_long % 256;
+	if (exit_code < 0)
+		exit_code += 256;
 	close_builtin_fds(cmd);
-	ft_putendl_fd("exit", cmd->out_fd);
 	exit(exit_code);
 }

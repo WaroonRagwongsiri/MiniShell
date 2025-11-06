@@ -55,6 +55,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_atoi_base(char *str, char *base);
 void	*ft_safe_calloc(size_t nmemb, size_t size, char *cmd);
+long	ft_atol(const char *nptr);
 
 // Bonus part
 typedef struct s_list
