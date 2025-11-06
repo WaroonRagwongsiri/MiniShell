@@ -17,3 +17,16 @@ Done
 5	echo -nnnnwadwapda ✅
 7	max pipe ✅
 8	unset หลายตัว ✅
+
+echo >
+echo -n -nnn -nnn -nnnnm
+cd -> only update oldpwd when it can really go there
+> <
+parser need to fix for redirect
+echo ''''''''$USER''''''''
+cd ~
+cd -
+export "HI= hi"
+echo " $USER $ "'$PWD'
+exit --
+<< EOF | << EOF | << EOF |
