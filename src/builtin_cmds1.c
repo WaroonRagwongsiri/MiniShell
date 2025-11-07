@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 15:16:16 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/07 20:05:00 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	builtin_exit(t_cmd_group *cmd)
 	int		exit_code;
 
 	ft_putendl_fd("exit", cmd->out_fd);
-	if (cmd->argv[1] == NULL)
-		exit(g_status);
+	if (cmd->argv[1] == NULL || ft_strncmp(cmd->argv[1], "--", 3) == 0)
+		exit(get_exit_stats(-1));
 	if (!is_valid_numeric(cmd->argv[1]))
 	{
 		ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);

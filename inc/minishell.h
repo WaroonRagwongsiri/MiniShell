@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 15:16:03 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/07 20:03:30 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void		print_formatted_env(char *entry, int fd);
 
 // builtin_utils3.c
 bool		is_valid_numeric(char *str);
+int			get_exit_stats(int exit_status);
 
 // builtin_export_utils.c
 int			export_error(char *arg);
