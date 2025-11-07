@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 20:05:36 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/07 21:00:10 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	run_shell(char ***env_ptr)
 		if (!is_valid_tokens(line))
 		{
 			exit_status = get_exit_stats(2);
-			ft_putendl_fd("syntax error near unexpected token `|'", 2);
 			continue ;
 		}
 		if (g_status == SIGINT)

@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 20:03:30 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/07 21:04:50 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,13 @@ bool		is_append_token(char *token);
 bool		is_simple_redirect(char *token, char c);
 bool		is_pipe_token(char *token);
 bool		is_valid_tokens(char *line);
+
+// parser_check_utils.c
+bool		is_redirect(char *str);
+bool		is_valid_pipes(char **tokens, int i);
+bool		is_valid_redirect(char **tokens, int i);
+void		put_err_parese_redirect(char *tokens);
+bool		is_valid_tokens_np(char *line);
 
 // parser_outfiles.c
 void		set_out_files(t_cmd_group *node);

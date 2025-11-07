@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/06 12:26:08 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/07 21:04:51 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ static char	*check_completed_pipe(char *str)
 	char	*joined;
 
 	tokens = tokenizer(str);
-	if ((tab_len(tokens) < 1) || !is_valid_tokens(str))
+	if ((tab_len(tokens) < 1) || !is_valid_tokens_np(str))
 		return (ft_strdup(str));
 	last_token = tokens[tab_len(tokens) - 1];
 	joined = ft_strdup(str);
-	while (ft_strncmp(last_token, "|", 2) == 0 && is_valid_tokens(joined))
+	while (ft_strncmp(last_token, "|", 2) == 0 && is_valid_tokens_np(joined))
 	{
 		line = readline("> ");
 		if (!line)

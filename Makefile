@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
+#    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/07 15:16:42 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/11/07 20:41:29 by waragwon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC_FILES = main.c \
 			parser_cmd.c \
 			parser_get_info.c \
 			parser_check.c \
+			parser_check_utils.c \
 			parser_in_files.c \
 			parser_out_files.c \
 			heredoc.c \
