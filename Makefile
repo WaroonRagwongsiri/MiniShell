@@ -6,7 +6,7 @@
 #    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/07 13:43:52 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/11/07 15:16:42 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ SRC_FILES = main.c \
 			builtin_utils3.c \
 			builtin_export_utils.c \
 			builtin_cd_utils.c \
+			builtin_echo_utils.c \
 			reader_utils.c 
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
