@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 20:40:08 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/07 21:04:50 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/07 23:20:07 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	is_redirect(char *str)
 {
 	if (is_simple_redirect(str, '<'))
 		return (true);
-	if (is_simple_redirect(str, '<'))
+	if (is_simple_redirect(str, '>'))
 		return (true);
 	if (is_append_token(str))
 		return (true);
