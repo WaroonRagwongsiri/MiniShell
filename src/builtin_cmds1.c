@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 14:34:03 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:16:16 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,7 @@ int	builtin_echo(t_cmd_group *cmd)
 			i = 2;
 		}
 	}
-	while (cmd->argv[i] != NULL)
-	{
-		ft_putstr_fd(cmd->argv[i], STDOUT_FILENO);
-		if (cmd->argv[i + 1] != NULL)
-			ft_putstr_fd(" ", STDOUT_FILENO);
-		i++;
-	}
+	print_echo_args(cmd, i, newline, STDOUT_FILENO);
 	if (newline)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	close_builtin_fds(cmd);
