@@ -6,7 +6,7 @@
 #    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/07 11:37:03 by pioncha2         ###   ########.fr        #
+#    Updated: 2025/11/07 13:20:11 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SRC_FILES = main.c \
 			iofiles2.c \
 			iofiles_utils.c \
 			expander.c \
-			expander_utils.c \
+			expander_expand_var.c \
+			expander_expand_token.c \
 			signal.c \
 			signal2.c \
 			utils_cmd_path.c \
