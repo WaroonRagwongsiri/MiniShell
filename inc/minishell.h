@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 13:30:05 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/07 13:17:55 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ typedef enum s_sig_mode
 	MAIN_HEREDOC
 }	t_sig_mode;
 
+typedef struct s_exp_tmp
+{
+	int		*exit_status;
+	char	***env_ptr;
+	bool	*in_single;
+	bool	*in_double;
+}	t_exp_tmp;
+
 // utils_tab.c
 char		**copy_tab(char **tab);
 void		*free_tab(char **tab);
@@ -81,6 +89,15 @@ void		print_cmd_group(t_cmd_group	*g);
 
 // expander.c
 void		expand_tokens(char **tokens, char ***env_ptr, int *exit_status);
+int			is_expandable_char(char c);
+char		*ft_strjoin_char1(char *str, char c);
+
+// expander_expand_var.c
+char		*expand_variable(char *token, int *i, char ***env_ptr, \
+t_exp_tmp input);
+
+// expander_expand_token.c 
+char		*expand_token(char *token, char ***env_ptr, int *exit_status);
 
 // builtin_cmd1.c
 int			builtin_echo(t_cmd_group *cmd);

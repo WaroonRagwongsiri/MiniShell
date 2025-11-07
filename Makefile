@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
+#    By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:14:26 by pioncha2          #+#    #+#              #
-#    Updated: 2025/11/06 20:48:17 by waroonwork@      ###   ########.fr        #
+#    Updated: 2025/11/07 13:20:11 by pioncha2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,8 @@ SRC_FILES = main.c \
 			iofiles2.c \
 			iofiles_utils.c \
 			expander.c \
+			expander_expand_var.c \
+			expander_expand_token.c \
 			signal.c \
 			signal2.c \
 			utils_cmd_path.c \
@@ -78,7 +80,7 @@ SRC_FILES = main.c \
 			builtin_utils2.c \
 			builtin_utils3.c \
 			builtin_export_utils.c \
-			reader_utils.c
+			reader_utils.c 
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
