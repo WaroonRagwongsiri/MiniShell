@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:47:18 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/06 20:49:39 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/07 20:11:31 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,14 @@ bool	is_valid_numeric(char *str)
 	if (digit_count > 19)
 		return (false);
 	return (check_exact(str, digit_count));
+}
+
+int	get_exit_stats(int exit_status)
+{
+	static int	g_exit_status = 0;
+
+	if (exit_status < 0)
+		return (g_exit_status);
+	g_exit_status = exit_status;
+	return (g_exit_status);
 }
