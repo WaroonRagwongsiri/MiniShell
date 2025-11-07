@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 13:17:55 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/07 14:34:17 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,9 @@ int			export_assign(char *arg, char ***env_ptr);
 int			export_without_value(char *arg, char ***env_ptr);
 int			handle_export_arg(char *arg, char ***env_ptr);
 int			export_print_only(t_cmd_group *cmd, char ***env_ptr, int fd);
+
+// builtin_cd_utils.c
+int			handle_cd(t_cmd_group *cmd, char *path, char *oldpwd, int fd);
 
 // exec_buildin.c
 int			is_builtin(char *cmd);

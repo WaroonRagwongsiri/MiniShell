@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmds3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/06 20:47:40 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/07 14:34:42 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,11 @@ int	builtin_pwd_main(t_cmd_group *cmd)
 	return (1);
 }
 
-static int	update_pwd(char ***env_ptr, int update_old_pwd)
-{
-	char	cwd[PATH_MAX];
-	char	*new_pwd;
-
-	if (update_old_pwd)
-		new_pwd = ft_strjoin("OLDPWD=", getcwd(cwd, sizeof(cwd)));
-	else
-		new_pwd = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
-	if (new_pwd != NULL)
-		set_env_var(env_ptr, new_pwd);
-	return (1);
-}
-
 int	builtin_cd_main(t_cmd_group *cmd)
 {
 	char	*path;
+	char	*oldpwd;
+	int		status;
 
 	if (tab_len(cmd->argv) > 2)
 		return (ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO), 1);
@@ -88,15 +76,10 @@ int	builtin_cd_main(t_cmd_group *cmd)
 	}
 	else
 		path = cmd->argv[1];
-	if (update_pwd(cmd->env_ptr, 1) && chdir(path) != 0)
-	{
-		perror("cd");
-		close_builtin_fds(cmd);
-		return (1);
-	}
-	update_pwd(cmd->env_ptr, 0);
+	oldpwd = ft_getenv(*(cmd->env_ptr), "OLDPWD");
+	status = handle_cd(cmd, path, oldpwd, cmd->out_fd);
 	close_builtin_fds(cmd);
-	return (0);
+	return (status);
 }
 
 int	builtin_exit_main(t_cmd_group *cmd)
