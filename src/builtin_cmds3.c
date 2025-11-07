@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 18:06:05 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 20:04:57 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/07 20:25:44 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ int	builtin_exit_main(t_cmd_group *cmd)
 
 	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (cmd->argv[1] == NULL || ft_strncmp(cmd->argv[1], "--", 3) == 0)
-		exit(get_exit_stats(-1));
+		exit_errno(get_exit_stats(-1));
 	if (!is_valid_numeric(cmd->argv[1]))
 	{
 		ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
 		close_builtin_fds(cmd);
-		exit(2);
+		exit_errno(2);
 	}
 	if (cmd->argv[2] != NULL)
 	{
@@ -101,5 +101,6 @@ int	builtin_exit_main(t_cmd_group *cmd)
 	if (exit_code < 0)
 		exit_code += 256;
 	close_builtin_fds(cmd);
-	exit(exit_code);
+	exit_errno(exit_code);
+	return (exit_code);
 }
