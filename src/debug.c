@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:49:04 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/10/31 20:57:24 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/08 10:43:52 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_cmd_group(t_cmd_group *g)
 
 	curr = g;
 	i = 0;
-	printf("---\n");
+	printf("---------------------------\n");
 	while (curr != NULL)
 	{
 		printf("== cmds[%d] ==\n", i);
@@ -62,8 +62,15 @@ void	print_cmd_group(t_cmd_group *g)
 		printf("cmds : %s\n", curr->cmd);
 		print_str_tab("argv: ", curr->argv);
 		printf("operator: %d\n", curr->operator);
-		printf("---\n");
+		printf("---------------------------\n");
 		curr = curr->next;
 		i++;
 	}
+	printf("\n");
+}
+
+void	print_debug(t_cmd_group *cmds, char *line)
+{
+	print_tokens(line);
+	print_cmd_group(cmds);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:11:15 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 21:04:50 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/08 10:37:19 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char		**tokenizer(char *s);
 // debug.c 
 void		print_tokens(char *line);
 void		print_cmd_group(t_cmd_group	*g);
+void		print_debug(t_cmd_group *cmds, char *line);
 
 // expander.c
 void		expand_tokens(char **tokens, char ***env_ptr, int *exit_status);
