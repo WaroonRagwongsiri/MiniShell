@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iofiles.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 09:46:16 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/04 12:47:42 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/08 11:03:42 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	loop_open(t_cmd_group *cmd_lines)
 {
 	t_cmd_group	*cur;
 
+	if (!cmd_lines)
+		return (0);
 	cur = cmd_lines;
 	while (cur && g_status != SIGINT)
 	{

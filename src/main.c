@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:12:56 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/08 10:44:08 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/08 10:57:56 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,19 @@ static void	run_shell(char ***env_ptr)
 		line = reader(env_ptr);
 		if (line == NULL)
 			exit_after_reader();
+		cmd_lines = init_cmd_group(line, env_ptr, &exit_status);
+		exit_status = loop_open(cmd_lines);
 		if (!is_valid_tokens(line))
 		{
 			exit_status = get_exit_stats(2);
 			continue ;
 		}
-		if (g_status == SIGINT)
-			exit_status = get_exit_stats(130);
-		cmd_lines = init_cmd_group(line, env_ptr, &exit_status);
 		if (DEBUG_MODE)
 			print_debug(cmd_lines, line);
-		exit_status = get_exit_stats(execute_command(cmd_lines));
+		if (g_status == SIGINT)
+			exit_status = get_exit_stats(130);
+		if (exit_status == 0)
+			exit_status = get_exit_stats(execute_command(cmd_lines));
 	}
 }
 

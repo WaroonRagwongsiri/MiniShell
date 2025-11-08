@@ -6,7 +6,7 @@
 /*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:57:20 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/05 13:17:25 by pioncha2         ###   ########.fr       */
+/*   Updated: 2025/11/08 11:01:09 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static bool	check_parser_filename(t_cmd_group *cmd_lines)
 int	execute_command(t_cmd_group *cmd_lines)
 {
 	int			process_num;
-	int			exit_status;
 
 	process_num = cmd_len(cmd_lines);
 	if (!check_parser_filename(cmd_lines))
@@ -83,16 +82,10 @@ int	execute_command(t_cmd_group *cmd_lines)
 		&& cmd_lines->argv[0] != NULL
 		&& is_builtin(cmd_lines->argv[0]))
 	{
-		exit_status = loop_open(cmd_lines);
-		if (exit_status != 0)
-			return (exit_status);
 		return (execute_builtin_main(cmd_lines));
 	}
 	else
 	{
-		exit_status = loop_open(cmd_lines);
-		if (exit_status != 0)
-			return (exit_status);
 		return (exec_cmd_wraper(cmd_lines, process_num));
 	}
 }

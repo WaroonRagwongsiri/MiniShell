@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_check_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 20:40:08 by waragwon          #+#    #+#             */
-/*   Updated: 2025/11/07 23:20:07 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/08 10:52:36 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ bool	is_valid_pipes(char **tokens, int i)
 			|| is_append_token(tokens[i - 1])
 			|| is_heredoc_token(tokens[i - 1])
 			|| is_simple_redirect(tokens[i - 1], '<')
-			|| is_simple_redirect(tokens[i - 1], '>'))
+			|| is_simple_redirect(tokens[i - 1], '>')
+			|| !tokens[i + 1])
 			return (false);
 	}
 	return (true);
