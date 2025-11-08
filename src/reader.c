@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pioncha2 <pioncha2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:13:29 by pioncha2          #+#    #+#             */
-/*   Updated: 2025/11/07 21:04:51 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/11/08 11:13:14 by pioncha2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,33 +68,33 @@ char	*get_prompt(char ***env_ptr)
 	return (prompt);
 }
 
-static char	*check_completed_pipe(char *str)
-{
-	char	*line;
-	char	*temp_line;
-	char	**tokens;
-	char	*last_token;
-	char	*joined;
+// static char	*check_completed_pipe(char *str)
+// {
+// 	char	*line;
+// 	char	*temp_line;
+// 	char	**tokens;
+// 	char	*last_token;
+// 	char	*joined;
 
-	tokens = tokenizer(str);
-	if ((tab_len(tokens) < 1) || !is_valid_tokens_np(str))
-		return (ft_strdup(str));
-	last_token = tokens[tab_len(tokens) - 1];
-	joined = ft_strdup(str);
-	while (ft_strncmp(last_token, "|", 2) == 0 && is_valid_tokens_np(joined))
-	{
-		line = readline("> ");
-		if (!line)
-			return (NULL);
-		temp_line = ft_strdup(line);
-		free(line);
-		joined = ft_strjoin(joined, " ");
-		joined = ft_strjoin(joined, temp_line);
-		tokens = tokenizer(joined);
-		last_token = tokens[tab_len(tokens) - 1];
-	}
-	return (joined);
-}
+// 	tokens = tokenizer(str);
+// 	if ((tab_len(tokens) < 1) || !is_valid_tokens_np(str))
+// 		return (ft_strdup(str));
+// 	last_token = tokens[tab_len(tokens) - 1];
+// 	joined = ft_strdup(str);
+// 	while (ft_strncmp(last_token, "|", 2) == 0 && is_valid_tokens_np(joined))
+// 	{
+// 		line = readline("> ");
+// 		if (!line)
+// 			return (NULL);
+// 		temp_line = ft_strdup(line);
+// 		free(line);
+// 		joined = ft_strjoin(joined, " ");
+// 		joined = ft_strjoin(joined, temp_line);
+// 		tokens = tokenizer(joined);
+// 		last_token = tokens[tab_len(tokens) - 1];
+// 	}
+// 	return (joined);
+// }
 
 char	*reader(char ***env_ptr)
 {
@@ -114,7 +114,7 @@ char	*reader(char ***env_ptr)
 		tmp_line = ft_strdup("");
 	if (!is_completed_quotes(&tmp_line) && tmp_line == NULL)
 		tmp_line = ft_strdup("");
-	tmp_line = check_completed_pipe(tmp_line);
+	// tmp_line = check_completed_pipe(tmp_line);
 	if (tmp_line != NULL && ft_strlen(tmp_line) > 0)
 		add_history(tmp_line);
 	return (tmp_line);
